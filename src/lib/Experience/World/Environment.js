@@ -57,7 +57,7 @@ export default class Environment {
     createFog() {
         this.fog = {}
 
-        this.fog.far = 35;
+        this.fog.far = 100;
         this.fog.near = 1;
         this.fog.colorFog = '#cccccc';
         this.fog.instance = new THREE.Fog('#cccccc', this.fog.near, this.fog.far);
@@ -71,7 +71,7 @@ export default class Environment {
     }
 
     removeFog() {
-        gsap.to(this.fog.instance, {duration: 1, far: 35, ease: "power2.inOut"});
+        gsap.to(this.fog.instance, {duration: 1, far: 100, ease: "power2.inOut"});
     }
 
 }
