@@ -35,7 +35,6 @@ export default class World {
 
         this.objects = [this.islandIce.resource.scene, this.islandDesert.resource.scene, this.islandFire.resource.scene, this.islandRuins.resource.scene]
         this.artworks = this.experience.world.artworks;
-        console.log(this.experience.world.artworks);
             
         //loop for every artwork in islandFire
         for (let i = 0; i < this.artworks.length; i++) {

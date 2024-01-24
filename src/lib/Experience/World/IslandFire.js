@@ -73,11 +73,7 @@ export default class IslandFire {
 
         this.artwork1 = new Artwork('artwork1', this.artworkTexture1, { x: 5.0, y: 1, z: -1 });
         this.artwork2 = new Artwork('artwork2', this.artworkTexture2, { x: 4.0, y: 1, z: -1 });
-        
-        console.log(this.artwork1);
-
-        // console.log(this.experience.world);
-        
+                
         this.experience.world.artworks.push(this.artwork1, this.artwork2);
     }
 }

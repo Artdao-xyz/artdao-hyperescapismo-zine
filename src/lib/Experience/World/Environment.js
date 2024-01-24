@@ -5,10 +5,14 @@ import { gsap } from 'gsap';
 
 export default class Environment {
     constructor() {
-        this.experience = new Experience();
-        this.scene = this.experience.scene;
+        this.experience = new Experience()
+        this.scene = this.experience.scene
+        this.resources = this.experience.resources
+        this.debug = this.experience.debug
+
         this.setSunLight();
         this.createFog()
+        this.setEnvironmentMap();
         
         
         sceneStore.subscribe((value) => {
@@ -19,7 +23,6 @@ export default class Environment {
             }
         });
 
-        // this.setEnvironmentMap();
     }
 
     setSunLight()
@@ -37,9 +40,12 @@ export default class Environment {
     {
         this.environmentMap = {};
         this.environmentMap.intensity = 0.4;
+        this.environmentMap.texture = this.resources.items.environmentMapTexture0;
         this.environmentMap.enconding = THREE.SRGBColorSpace;
-
-        this.scene.environment = this.environmentMap.texture;
+        this.environmentMap.mapping = THREE.EquirectangularReflectionMapping
+        
+        this.scene.background = this.environmentMap.texture;
+        // this.scene.environment = this.environmentMap.texture;
 
         this.environmentMap.updateMaterial = () => {
             this.scene.traverse(child =>
@@ -47,6 +53,8 @@ export default class Environment {
                 if(child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial) {
                     child.material.envMap = this.environmentMap.texture;
                     child.material.envMapIntensity = this.environmentMap.intensity;
+                    child.material.enconding = this.environmentMap.enconding;
+                    child.material.mapping = this.environmentMap.mapping;
                     child.material.needsUpdate = true;
                 }
             });
@@ -57,21 +65,23 @@ export default class Environment {
     createFog() {
         this.fog = {}
 
-        this.fog.far = 100;
+        this.fog.far = 25;
+        // this.fog.far = 100;
         this.fog.near = 1;
-        this.fog.colorFog = '#cccccc';
-        this.fog.instance = new THREE.Fog('#cccccc', this.fog.near, this.fog.far);
+        this.fog.colorFog = '#919191';
+        this.fog.instance = new THREE.Fog(this.fog.colorFog, this.fog.near, this.fog.far);
 
         this.scene.fog = this.fog.instance;
 
     }
 
     addFog() {
-        gsap.to(this.fog.instance, {duration: 1, far: 15, ease: "power2.inOut"});
+        gsap.to(this.fog.instance, {duration: 1, far: 25, ease: "power2.inOut"});
     }
 
     removeFog() {
-        gsap.to(this.fog.instance, {duration: 1, far: 100, ease: "power2.inOut"});
+        gsap.to(this.fog.instance, {duration: 1, far: 25, ease: "power2.inOut"});
+        // gsap.to(this.fog.instance, {duration: 1, far: 100, ease: "power2.inOut"});
     }
 
 }

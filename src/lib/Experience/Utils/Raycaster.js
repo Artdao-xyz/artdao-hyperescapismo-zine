@@ -20,10 +20,10 @@ export default class Raycaster {
         this.rayDirection = new THREE.Vector3(10, 0, 0)
         this.rayDirection.normalize()
 
+        this.selectIce = new Select(this.targets[0].position);
+        this.selectDesert = new Select(this.targets[1].position);
         this.selectFire = new Select(this.targets[2].position);
-        this.selectDesert = new Select();
-        this.selectIce = new Select();
-        this.selectRuins = new Select();
+        this.selectRuins = new Select(this.targets[3].position);
 
         // console.log();
 
@@ -47,18 +47,36 @@ export default class Raycaster {
                     this.currentIntersect = intersects[0]
                     document.body.style.cursor = 'pointer';
                     // this.currentIntersect.object.scale.set(1.2, 1.2, 1.2);
-                    if (this.currentIntersect.object.name == "IslandGround") {
+                    if (this.currentIntersect.object.name == "island-ice") {
+                        this.selectIce.createSelect();
+                    }
+                    if (this.currentIntersect.object.name == "island-desert") {
+                        this.selectDesert.createSelect();
+                    }
+                    if (this.currentIntersect.object.name == "island-fire") {
                         this.selectFire.createSelect();
                     }
-                    // this.select.createSelect();
+                    if (this.currentIntersect.object.name == "island-ruins") {
+                        this.selectRuins.createSelect();
+                    }
                 }
             }
             else {
                 if(this.currentIntersect)
                 {
                     document.body.style.cursor = 'default';
-                    this.selectFire.removeSelect();
-                    // this.currentIntersect.object.scale.set(1, 1, 1);
+                    if (this.currentIntersect.object.name == "island-ice") {
+                        this.selectIce.removeSelect();
+                    }
+                    if (this.currentIntersect.object.name == "island-desert") {
+                        this.selectDesert.removeSelect();
+                    }
+                    if (this.currentIntersect.object.name == "island-fire") {
+                        this.selectFire.removeSelect();
+                    }
+                    if (this.currentIntersect.object.name == "island-ruins") {
+                        this.selectRuins.removeSelect();
+                    }
                 }
                 this.currentIntersect = null
             }
@@ -71,8 +89,16 @@ export default class Raycaster {
             {
                 console.log(this.currentIntersect.object.name);
 
-                if (this.currentIntersect.object.name == "IslandGround") {
-                    sceneStore.set("islandFire");
+                if (this.currentIntersect.object.name == "island-ice") {
+                    sceneStore.set("island-ice");
+                }
+                if (this.currentIntersect.object.name == "island-desert") {
+                    sceneStore.set("island-desert");                }
+                if (this.currentIntersect.object.name == "island-fire") {
+                    sceneStore.set("island-fire");
+                }
+                if (this.currentIntersect.object.name == "island-ruins") {
+                    sceneStore.set("island-ruins");
                 }
                 if (this.currentIntersect.object.name == "artwork1") {
                     sceneStore.set("artwork1");

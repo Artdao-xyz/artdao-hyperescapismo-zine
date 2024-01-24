@@ -22,7 +22,7 @@ export default class Artwork {
 
     createArtwork() {
         this.artworkGeometry = new THREE.PlaneGeometry(1 * this.ratio, 1);
-        this.artworkMaterial = new THREE.MeshBasicMaterial({ map: this.texture});
+        this.artworkMaterial = new THREE.MeshBasicMaterial({ map: this.texture, side: THREE.DoubleSide});
         
         this.artworkMesh = new THREE.Mesh(this.artworkGeometry, this.artworkMaterial);
         this.artworkMesh.name = this.name;

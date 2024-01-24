@@ -25,9 +25,9 @@ export default class IslandIce {
     }
 
     setModel() {
-        this.model = this.resource.scene
-        this.model.position.set(-15, 0, 0)
-        this.model.rotation.set(0, Math.PI, 0);
+        this.model = this.resource.scene;
+        this.model.position.set(-15, 0, 0);
+        // this.model.rotation.set(0, Math.PI, 0);
         this.scene.add(this.model)
 
         this.model.traverse((child) => {
@@ -45,18 +45,30 @@ export default class IslandIce {
         this.resources.items.islandIceTexture.minFilter = THREE.NearestFilter
         this.resources.items.islandIceTexture.magFilter = THREE.NearestFilter
         this.resources.items.islandIceTexture.generateMipmaps = false
-        
+
+        this.resources.items.islandIceAlphaMap.flipY = false;
+        this.resources.items.islandIceAlphaMap.colorSpace = THREE.SRGBColorSpace;
+        this.resources.items.islandIceAlphaMap.minFilter = THREE.NearestFilter
+        this.resources.items.islandIceAlphaMap.magFilter = THREE.NearestFilter
+        this.resources.items.islandIceAlphaMap.generateMipmaps = false
+
+        // this.resources.items.islandIceAlphaMap.wrapT = THREE.RepeatWrapping;
+        // this.resources.items.islandIceAlphaMap.wrapS = THREE.RepeatWrapping;
+        // this.resources.items.islandIceAlphaMap.repeat.set( 9, 1 );
+
         this.textures.color = this.resources.items.islandIceTexture;
+        this.textures.alphaMap = this.resources.items.islandIceAlphaMap;
     }
 
     setMaterial() {
         this.material = new THREE.MeshBasicMaterial({ 
             map: this.textures.color, 
+            alphaMap: this.textures.alphaMap,
             transparent: true, 
-            // alphaTest: 0.75, 
-            side: THREE.DoubleSide });
+            alphaTest: 0.1, 
+            side: THREE.DoubleSide 
+        });
 
-        //add texture to island
         this.model.traverse((child) => {
             if (child.isMesh) {
                 child.material = this.material;

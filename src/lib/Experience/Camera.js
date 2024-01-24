@@ -13,8 +13,6 @@ export default class Camera {
         this.scene = this.experience.scene;
         this.canvas = this.experience.canvas;
 
-        console.log(this.experience);
-
         this.setInstance();
         this.setOrbitControls();
 
@@ -25,10 +23,6 @@ export default class Camera {
 
         this.instance = new THREE.PerspectiveCamera(35, this.sizes.width / this.sizes.height, 0.1, 200);
         // this.instance.position.set(0, 0, 30);
-        console.log(this.instance.aspect);
-        console.log(this.sizes.width);
-        console.log(this.sizes.height);
-
         
         // if(this.instance.aspect > 1){
         //     this.instance.position.z = 30 / this.instance.aspect;
@@ -48,27 +42,38 @@ export default class Camera {
 
     cameraUpdate() {
         sceneStore.subscribe((value) => {
-
             if (value == "idle") {
                 this.newlookAt = new THREE.Vector3(0, 0, 0);
-
                 gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
-
                 gsap.to(this.instance.position, { duration: 1, x: 0, y: 0, z: 70 / this.instance.aspect, ease: "power2.inOut" });
             }
-            if (value == "islandFire") {
-                //make the camera look at the geometry
-                this.newlookAt = this.experience.world.islandFire.model.position; 
-
+            if (value == "island-ice") {
+                this.newlookAt = this.experience.world.islandIce.model.position; 
                 gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
+                gsap.to(this.instance.position, { duration: 1, x: -15.0, y: 1.5, z: 5, ease: "power2.inOut" });
+            }
 
+            if (value == "island-desert") {
+                this.newlookAt = this.experience.world.islandDesert.model.position; 
+                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
+                gsap.to(this.instance.position, { duration: 1, x: -4.5, y: 1.5, z: 5, ease: "power2.inOut" });
+            }
+
+            if (value == "island-fire") {
+                this.newlookAt = this.experience.world.islandFire.model.position; 
+                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
                 gsap.to(this.instance.position, { duration: 1, x: 4.5, y: 1.5, z: 5, ease: "power2.inOut" });
             }
+
+            if (value == "island-ruins") {
+                this.newlookAt = this.experience.world.islandRuins.model.position; 
+                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
+                gsap.to(this.instance.position, { duration: 1, x: 15.0, y: 1.5, z: 5, ease: "power2.inOut" });
+            }
+
             if (value == "artwork1") {
                 this.newlookAt = this.experience.world.artworks[0].artworkMesh.position;
-            
                 gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
-
                 gsap.to(this.instance.position, { duration: 1, x: 4.9, y: 1, z: 2, ease: "power2.inOut" , onUpdate: () => {
                     this.instance.lookAt(this.newlookAt)
                 }});

@@ -49,11 +49,11 @@ export default class Resources extends EventEmitter {
                     this.sourceLoaded(source, file);
                 });
             }
-            // else if (source.type === 'cubeTexture') {
-            //     this.loaders.cubeTextureLoader.load(source.path, (file) => {
-            //         this.sourceLoaded(source, file);
-            //     });
-            // }
+            else if (source.type === 'cubeTexture') {
+                this.loaders.cubeTextureLoader.load(source.path, (file) => {
+                    this.sourceLoaded(source, file);
+                });
+            }
         }
     }
 
