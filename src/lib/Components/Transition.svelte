@@ -19,14 +19,14 @@
         // });
 
         /* SECOND OPTION */
-        gsap.to([div1], { duration: 0.5, xPercent: -100, ease: 'power2.inOut' });
-        gsap.to([div2], { duration: 0.5, xPercent: +100, ease: 'power2.inOut' });
+        // gsap.to([div1], { duration: 0.5, xPercent: -100, ease: 'power2.inOut' });
+        // gsap.to([div2], { duration: 0.5, xPercent: +100, ease: 'power2.inOut' });
 
-        gsap.delayedCall(1.5, () => {
-            gsap.to([div1], { duration: 0.5, xPercent: 0, ease: 'power2.inOut' });
-            gsap.to([div2], { duration: 0.5, xPercent: 0, ease: 'power2.inOut' ,
-            onComplete: () => { transitionStore.set(false) }});
-        });
+        // gsap.delayedCall(1.5, () => {
+        //     gsap.to([div1], { duration: 0.5, xPercent: 0, ease: 'power2.inOut' });
+        //     gsap.to([div2], { duration: 0.5, xPercent: 0, ease: 'power2.inOut' ,
+        //     onComplete: () => { transitionStore.set(false) }});
+        // });
 
 
 
@@ -44,10 +44,10 @@
     <img class="w-full h-full" src="/textures/cloud-transition2.png" alt="">
 </div> -->
 
-<div bind:this={div1} class="absolute top-0 left-full w-full h-full z-20">
+<!-- <div bind:this={div1} class="absolute top-0 left-full w-full h-full z-20">
     <img class="w-full h-full" src="/textures/transition-right.png" alt="">
 </div>
 
 <div bind:this={div2} class="absolute top-0 -left-full w-full h-full z-20">
     <img class="w-full h-full" src="/textures/transition-left.png" alt="">
-</div>
+</div> -->
