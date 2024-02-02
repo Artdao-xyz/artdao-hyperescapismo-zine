@@ -76,6 +76,16 @@ export default [
         type: 'texture',
         path: 'textures/artwork3.png'
     },
+    {
+        name: 'artworkTexture4',
+        type: 'texture',
+        path: 'textures/artwork4.png'
+    },
+    {
+        name: 'artworkTexture5',
+        type: 'texture',
+        path: 'textures/artwork5.png'
+    },
     //UI
     {
         name: 'uiSelect',
@@ -134,5 +144,11 @@ export default [
             'textures/environmentMap-3/pz.png',
             'textures/environmentMap-3/nz.png'
         ]
+    },
+    // FONTS
+    {
+        name: 'artworkFont',
+        type: 'font',
+        path: 'fonts/Clash Display_Regular.json'
     },
 ]

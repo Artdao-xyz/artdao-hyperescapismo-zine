@@ -30,12 +30,12 @@
         const experience = new Experience(canvas);
 
         return () => {
+            experience.destroy();
+            canvas.remove();
             loading();
             scene();
             transitionn();
 
-            experience.destroy();
-            canvas.remove();
         }
         
     });
@@ -56,9 +56,7 @@
 
 <canvas bind:this={canvas}></canvas>
 
-<div class="absolute top-0 left-1/2 -translate-x-1/2 z-10 p-4">
-    <button on:click={ () => sceneStore.set("idle") } class="bg-white text-xs text-black rounded-3xl px-4 py-1">Go to Idle</button>
-</div>
+
 
 <UI/>
 

@@ -15,7 +15,6 @@ export default class World {
         this.scene = this.experience.scene;
         this.resources = this.experience.resources;
         this.camera = this.experience.camera.instance;
-        this.artworks = [];
         
         this.resources.on('ready', () => {
             this.islandIce = new IslandIce();
@@ -34,12 +33,12 @@ export default class World {
     setRaycaster() {
 
         this.objects = [this.islandIce.resource.scene, this.islandDesert.resource.scene, this.islandFire.resource.scene, this.islandRuins.resource.scene]
-        this.artworks = this.experience.world.artworks;
+        // this.artworks = this.experience.world.artworks;
             
         //loop for every artwork in islandFire
-        for (let i = 0; i < this.artworks.length; i++) {
-            this.objects.push(this.artworks[i].artworkMesh);
-        }
+        // for (let i = 0; i < this.islandFire.model.artworks.length; i++) {
+        //     this.objects.push(this.artworks[i].artworkMesh);
+        // }
         this.raycaster = new Raycaster(this.objects, this.camera);
     }
     

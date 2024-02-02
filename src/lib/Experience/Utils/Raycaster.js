@@ -103,6 +103,74 @@ export default class Raycaster {
                 if (this.currentIntersect.object.name == "artwork1") {
                     sceneStore.set("artwork1");
                 }
+                if (this.currentIntersect.object.name == "artwork1") {
+                    sceneStore.set("artwork1");
+                }
+                if (this.currentIntersect.object.name == "artwork2") {
+                    sceneStore.set("artwork2");
+                }
+                if (this.currentIntersect.object.name == "artwork3") {
+                    sceneStore.set("artwork3");
+                }
+                if (this.currentIntersect.object.name == "artwork4") {
+                    sceneStore.set("artwork4");
+                }
+                if (this.currentIntersect.object.name == "artwork5") {
+                    sceneStore.set("artwork5");
+                }
+                if (this.currentIntersect.object.name == "artwork6") {
+                    sceneStore.set("artwork6");
+                }
+                if (this.currentIntersect.object.name == "artwork7") {
+                    sceneStore.set("artwork7");
+                }
+                if (this.currentIntersect.object.name == "artwork8") {
+                    sceneStore.set("artwork8");
+                }
+                if (this.currentIntersect.object.name == "artwork9") {
+                    sceneStore.set("artwork9");
+                }
+                if (this.currentIntersect.object.name == "artwork10") {
+                    sceneStore.set("artwork10");
+                }
+                if (this.currentIntersect.object.name == "artwork11") {
+                    sceneStore.set("artwork11");
+                }
+                if (this.currentIntersect.object.name == "artwork12") {
+                    sceneStore.set("artwork12");
+                }
+                if (this.currentIntersect.object.name == "artwork13") {
+                    sceneStore.set("artwork13");
+                }
+                if (this.currentIntersect.object.name == "artwork14") {
+                    sceneStore.set("artwork14");
+                }
+                if (this.currentIntersect.object.name == "artwork15") {
+                    sceneStore.set("artwork15");
+                }
+                if (this.currentIntersect.object.name == "artwork16") {
+                    sceneStore.set("artwork16");
+                }
+                if (this.currentIntersect.object.name == "artwork17") {
+                    sceneStore.set("artwork17");
+                }
+                if (this.currentIntersect.object.name == "artwork18") {
+                    sceneStore.set("artwork18");
+                }
+                if (this.currentIntersect.object.name == "artwork19") {
+                    sceneStore.set("artwork19");
+                }
+                if (this.currentIntersect.object.name == "artwork20") {
+                    sceneStore.set("artwork20");
+                }
+                
+                if (this.currentIntersect.object.name == "portal-ice" || this.currentIntersect.object.name == "portal-desert" || this.currentIntersect.object.name == "portal-fire" || this.currentIntersect.object.name == "portal-ruins") {
+                    sceneStore.set("idle");
+                    //pick a random scene
+                    // let scenes = ["island-ice", "island-desert", "island-fire", "island-ruins"];
+                    // let randomScene = scenes[Math.floor(Math.random() * scenes.length)];
+                    // sceneStore.set(randomScene);
+                }
             }
         }
     }
