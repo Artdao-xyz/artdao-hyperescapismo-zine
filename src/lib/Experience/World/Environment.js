@@ -25,12 +25,10 @@ export default class Environment {
             }
         });
 
-        if (this.debug) {
+        if (this.debug.active) {
             this.debugFolder = this.debug.ui.addFolder('environment');
 
             // this.debugFolder.add(this.sunLight, 'intensity').min(0).max(10).step(0.001).name('sunLightIntensity');
-
-        
         }
 
     }
