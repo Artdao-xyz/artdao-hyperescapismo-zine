@@ -212,6 +212,6 @@
 </div>
 
 <div class="absolute w-full top-1/2 flex justify-between items-center z-10">
-    <button on:click={moveLeft}><img  class="w-full h-full origin-left scale-50" src="/textures/arrow-left.png" alt="Left Arrow"></button>
-    <button on:click={moveRight}><img class="w-full h-full origin-right scale-50" src="/textures/arrow-right.png" alt="Right Arrow"></button>
+    <button on:click={moveLeft}><img  class="w-full h-full origin-left scale-200" src="/textures/arrow-left.png" alt="Left Arrow"></button>
+    <button on:click={moveRight}><img class="w-full h-full origin-right scale-200" src="/textures/arrow-right.png" alt="Right Arrow"></button>
 </div>
