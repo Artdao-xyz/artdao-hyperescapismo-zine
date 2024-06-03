@@ -41,12 +41,11 @@
 
     const moveLeft = () => {
 
-        setTransition();
         if (currentScene != 'idle') {
-           
+            
             if (currentScene == 'island-ice' || currentScene == 'island-desert' || currentScene == 'island-fire' || currentScene == 'island-ruins') { 
-
-
+                
+                
                 currentIndex = currentIndex > 0 ? currentIndex - 1 : 0;
                 if (currentIndex == 0) {
                     sceneStore.set("island-ice");
@@ -58,6 +57,7 @@
                     sceneStore.set("island-ruins");
                 }
                 lastIsland = currentScene;
+                setTransition();
 
             }
             else {
@@ -125,9 +125,6 @@
 
     }
     const moveRight = () => {
-        
-        setTransition();
-
     
         if (currentScene != 'idle') {
             if (currentScene == 'island-ice' || currentScene == 'island-desert' || currentScene == 'island-fire' || currentScene == 'island-ruins') {
@@ -144,6 +141,7 @@
                     sceneStore.set("island-ruins");
                 }
                 lastIsland = currentScene;
+                setTransition();
 
             }
             else {

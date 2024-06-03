@@ -24,6 +24,7 @@
 
         const transitionn = transitionStore.subscribe((value) => {
             transition = value;
+            console.log('transition', transition)
         });
         
         
@@ -34,7 +35,7 @@
             canvas.remove();
             loading();
             scene();
-            transitionn();
+            // transitionn();
 
         }
         
