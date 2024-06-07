@@ -16,9 +16,11 @@ export default class Raycaster {
         this.raycasterEnabled = true;
         this.raycaster = new THREE.Raycaster()
         this.currentIntersect = null
-        this.rayOrigin = new THREE.Vector3(- 3, 0, 0)
-        this.rayDirection = new THREE.Vector3(10, 0, 0)
-        this.rayDirection.normalize()
+        // this.rayOrigin = new THREE.Vector3(this.camera.position.x, this.camera.position.y, this.camera.position.z)
+        // this.rayDirection = new THREE.Vector3(10, 0, 0)
+        // this.rayDirection.normalize()
+
+        sceneStore.subscribe((value) => {this.scene = value} );
 
         this.selectIce = new Select(this.targets[0].position);
         this.selectDesert = new Select(this.targets[1].position);
@@ -27,7 +29,8 @@ export default class Raycaster {
 
         // console.log();
 
-        
+        let prevScene = 'idle';
+                
         this.pointerMove();
         this.pointerClick();
     }
@@ -35,12 +38,11 @@ export default class Raycaster {
     pointerMove() {
         
         onpointermove = (event) => {
-            this.mouse.x = event.clientX / this.sizes.width * 2 - 1
+            this.mouse.x = (event.clientX / this.sizes.width) * 2 - 1
             this.mouse.y = - (event.clientY / this.sizes.height) * 2 + 1
             this.raycaster.setFromCamera(this.mouse, this.camera)
 
             const intersects = this.raycaster.intersectObjects(this.targets)
-
         
             if(intersects.length > 0) {  
                 if(!this.currentIntersect) {
@@ -85,16 +87,21 @@ export default class Raycaster {
 
     pointerClick() {
         onclick = (event) => {
-            if(this.currentIntersect)
-            {
-                console.log(this.currentIntersect.object.name);
+
+            const intersects = this.raycaster.intersectObjects(this.targets)
+            console.log(intersects);
+            
+            if(intersects.length > 0) { 
+                
+                this.currentIntersect = intersects[0]
 
                 if (this.currentIntersect.object.name == "island-ice") {
                     sceneStore.set("island-ice");
                 }
                 if (this.currentIntersect.object.name == "island-desert") {
                     sceneStore.set("island-desert");                }
-                if (this.currentIntersect.object.name == "island-fire") {
+                if (this.scene !='island-fire' && this.currentIntersect.object.name == "island-fire") {
+                    // console.log('island fire!!!!!!!!')
                     sceneStore.set("island-fire");
                 }
                 if (this.currentIntersect.object.name == "island-ruins") {
@@ -171,8 +178,9 @@ export default class Raycaster {
                     // let randomScene = scenes[Math.floor(Math.random() * scenes.length)];
                     // sceneStore.set(randomScene);
                 }
-            }
+        
         }
     }
+}
 
 }

@@ -41,9 +41,9 @@ export default class Renderer {
         });
 
         // this.instance.physicallyCorrectLights = true;
-        this.instance.outputColorSpace = THREE.SRGBColorSpace;
-        this.instance.toneMapping = THREE.ReinhardToneMapping;
-        this.instance.toneMappingExposure = 1.75;
+        // this.instance.outputColorSpace = THREE.SRGBColorSpace;
+        this.instance.toneMapping = THREE.ACESFilmicToneMapping;
+        this.instance.toneMappingExposure = 1.0;
         this.instance.shadowMap.enabled = true;
         this.instance.shadowMap.type = THREE.PCFSoftShadowMap;
         this.instance.setClearColor('#F5F1ED');

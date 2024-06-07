@@ -207,11 +207,11 @@
 </script>
 
 <div class="absolute top-0 left-1/2 -translate-x-1/2 flex z-10 gap-20 p-4">
-    <button disabled={isIdle} bind:this={menuButton} on:click={ () => sceneStore.set("idle") } class="{ isIdle ? 'text-gray-500 bg-gray-200' : 'text-black bg-white'} text-xs rounded-3xl px-4 py-1" >Go to Menu</button>
-    <button disabled={isIsland} bind:this={islandButton} on:click={ () => sceneStore.set(lastIsland) }  class="{ isIsland ? 'text-gray-500 bg-gray-200' : 'text-black bg-white'} text-xs rounded-3xl px-4 py-1" >Go to Island</button>
+    <button disabled={isIdle} bind:this={menuButton} on:click|stopPropagation={ () => sceneStore.set("idle") } class="outline-none select-none { isIdle ? 'text-gray-500 bg-gray-200' : 'text-black bg-white'} text-xs rounded-3xl px-4 py-1" >Go to Menu</button>
+    <button disabled={isIsland} bind:this={islandButton} on:click|stopPropagation={ () => sceneStore.set(lastIsland) }  class="outline-none select-none { isIsland ? 'text-gray-500 bg-gray-200' : 'text-black bg-white'} text-xs rounded-3xl px-4 py-1" >Go to Island</button>
 </div>
 
 <div class="absolute w-full top-1/2 flex justify-between items-center z-10">
-    <button on:click={moveLeft}><img  class="w-full h-full origin-left scale-200" src="/textures/arrow-left.png" alt="Left Arrow"></button>
-    <button on:click={moveRight}><img class="w-full h-full origin-right scale-200" src="/textures/arrow-right.png" alt="Right Arrow"></button>
+    <button on:click|stopPropagation={moveLeft}><img draggable="false" class="outline-none select-none w-full h-full origin-left scale-200" src="/textures/arrow-left.png" alt="Left Arrow"></button>
+    <button on:click|stopPropagation={moveRight}><img draggable="false" class="outline-none select-none w-full h-full origin-right scale-200" src="/textures/arrow-right.png" alt="Right Arrow"></button>
 </div>

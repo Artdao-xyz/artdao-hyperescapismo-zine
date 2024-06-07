@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import gsap from 'gsap';
 import Experience from "../Experience";
 import Artwork from "./Artwork";
 import { sceneStore } from '$lib/store.js';
@@ -19,6 +20,7 @@ export default class IslandFire {
         this.artworks = [];
 
         // console.log(positions);
+        let floating = true;
 
         this.addArtworks()
 
@@ -71,8 +73,23 @@ export default class IslandFire {
         this.setTextures();
         this.setMaterial();
 
-        // this.float();
-        this.rotate();
+        this.time.on('animate', () => { 
+            
+            // this.float(floating)
+            
+                // this.model.position.set(positions.islandFire.position.x, positions.islandFire.position.y, positions.islandFire.position.z);
+            // } 
+
+        });
+        // this.rotate();
+
+        sceneStore.subscribe((value) => {
+            if (value == "island-fire") {
+                floating = true;
+            } else {
+                floating = false;         
+            }
+        });
     }
 
     setModel() {
@@ -141,33 +158,14 @@ export default class IslandFire {
         this.artworks.push(artwork1.artworkMesh, artwork2.artworkMesh, artwork3.artworkMesh, artwork4.artworkMesh, artwork5.artworkMesh);
 
         this.model.add(...this.artworks);
-
-        sceneStore.subscribe((value) => {
-            if (value != "island-fire") {
-                setTimeout(() => {
-                    // artwork1.hide();
-                    // artwork2.hide();
-                    // artwork3.hide();
-                    // artwork4.hide();
-                    // artwork5.hide();
-                }, 1000);
-            }
-            else {
-                setTimeout(() => {
-                    artwork1.show();
-                    artwork2.show();
-                    artwork3.show();
-                    artwork4.show();
-                    artwork5.show();
-                }, 1000);
-            }
-        });
     }
 
-    float() {
-        this.time.on('animate', () => {
+    float(floating) {
+        if (floating) {
             this.model.position.y = Math.sin(this.time.elapsed * 0.001) * 0.05;
-        });
+        } else {
+            this.model.position.set(positions.islandFire.position.x, positions.islandFire.position.y, positions.islandFire.position.z);
+        }
     }
 
     rotate() {

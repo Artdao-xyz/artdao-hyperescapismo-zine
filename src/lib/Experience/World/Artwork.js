@@ -51,7 +51,7 @@ export default class Artwork {
         this.artworkMesh.name = this.name;
         
         this.artworkMesh.position.set(this.position.x, this.position.y, this.position.z);
-        this.artworkMesh.scale.set(0.35, 0.35, 0.35);
+        this.artworkMesh.scale.set(0.5, 0.5, 0.5);
         this.artworkMesh.rotation.set(0, this.rotation.y, 0);
 
         this.experience.scene.add(this.artworkMesh);
@@ -68,7 +68,6 @@ export default class Artwork {
         // textGeometry.computeBoundingBox();
 
         let material = new THREE.MeshBasicMaterial({
-            color: 0x000000, // Black text color
             side: THREE.DoubleSide,
         });
 
