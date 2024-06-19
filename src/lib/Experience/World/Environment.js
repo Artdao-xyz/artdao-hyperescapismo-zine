@@ -10,8 +10,8 @@ export default class Environment {
         this.resources = this.experience.resources
         this.debug = this.experience.debug
 
-        // this.setAmientLight();
-        // this.setSunLight();
+        this.setAmientLight();
+        this.setSunLight();
         this.createFog()
         this.setEnvironmentMap();
         this.environmentUpdate()
@@ -45,14 +45,14 @@ export default class Environment {
     }
 
     setAmientLight() {
-        this.ambientLight = new THREE.AmbientLight('#ffffff', 1.5);
+        this.ambientLight = new THREE.AmbientLight('#ffffff', 0.5);
         this.scene.add(this.ambientLight);
     }
 
     setEnvironmentMap()
     {
         this.environmentMap = {};
-        this.environmentMap.intensity = 0.4;
+        this.environmentMap.intensity = 0.5;
         this.environmentMap.texture = null;
         this.environmentMap.enconding = THREE.SRGBColorSpace;
         this.environmentMap.mapping = THREE.EquirectangularReflectionMapping
@@ -75,56 +75,29 @@ export default class Environment {
         this.environmentMap.updateMaterial();
     }
 
-    environmentUpdate()
-    {
-        sceneStore.subscribe((value) => {
-            if (value == "idle") {
-                setTimeout(() => {
-                    this.environmentMap.texture = null;
-                    this.scene.background = this.environmentMap.texture;
-                }, 1000);
-            }
-            if (value == "island-ice") {
-                setTimeout(() => {
-                    this.environmentMap.texture = this.resources.items.environmentMapTexture1;
-                    this.scene.background = this.environmentMap.texture;
-                }, 1000);
-            }
-            if (value == "island-desert") {
-                setTimeout(() => {
-                    this.environmentMap.texture = this.resources.items.environmentMapTexture0;
-                    this.scene.background = this.environmentMap.texture;
-                }, 1000);
-
-            }
-            if (value == "island-fire" || value == "artwork1" || value == "artwork2" || value == "artwork3") {
-                setTimeout(() => {
-                    this.environmentMap.texture = this.resources.items.environmentMapTexture2;
-                    this.scene.background = this.environmentMap.texture;
-                }, 1000);
-
-            }
-            if (value == "island-ruins") {
-                setTimeout(() => {
-                    this.environmentMap.texture = this.resources.items.environmentMapTexture3;
-                    this.scene.background = this.environmentMap.texture;
-                }, 1000);
-
-            }
-        });
-    
-
+    environmentUpdate() {
+        this.environmentMap.texture = this.resources.items.environmentMap;
+        this.scene.background = this.environmentMap.texture;
+        // sceneStore.subscribe((value) => {
+        //     if (value == "idle") {
+        //         setTimeout(() => {
+        //             this.environmentMap.texture = null;
+        //             this.scene.background = this.environmentMap.texture;
+        //         }, 1000);
+        //     } else {
+        //         this.environmentMap.texture = this.resources.items.environmentMapTexture4;
+        //         this.scene.background = this.environmentMap.texture;
+        //     }
+        // });
     }
 
     createFog() {
         this.fog = {}
 
-        this.fog.far = 10;
+        this.fog.far = 30;
         // this.fog.far = 100;
-        this.fog.near = 1;
-        // this.fog.colorFog = '#919191';
-        this.fog.colorFog = '#262837';
-        // this.fog.colorFog = '#111111';
+        this.fog.near = -10;
+        this.fog.colorFog = '#DBE0E2';
         this.fog.instance = new THREE.Fog(this.fog.colorFog, this.fog.near, this.fog.far);
 
         this.scene.fog = this.fog.instance;
@@ -132,11 +105,11 @@ export default class Environment {
     }
 
     addFog() {
-        gsap.to(this.fog.instance, {duration: 1, far: 10, ease: "power2.inOut"});
+        gsap.to(this.fog.instance, {duration: 1, far: 30, ease: "power2.inOut"});
     }
 
     removeFog() {
-        gsap.to(this.fog.instance, {duration: 1, far: 10, ease: "power2.inOut"});
+        gsap.to(this.fog.instance, {duration: 1, far: 30, ease: "power2.inOut"});
         // gsap.to(this.fog.instance, {duration: 1, far: 100, ease: "power2.inOut"});
     }
 

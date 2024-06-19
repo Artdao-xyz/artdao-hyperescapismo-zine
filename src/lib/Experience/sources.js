@@ -93,57 +93,10 @@ export default [
         path: 'select-arrow.png'
     },
     //ENV MAPS
-    {
-        name: 'environmentMapTexture0',
-        type: 'cubeTexture',
-        path:
-        [
-            'textures/environmentMap-0/px.png',
-            'textures/environmentMap-0/nx.png',
-            'textures/environmentMap-0/py.png',
-            'textures/environmentMap-0/ny.png',
-            'textures/environmentMap-0/pz.png',
-            'textures/environmentMap-0/nz.png'
-        ]
-    },
-    {
-        name: 'environmentMapTexture1',
-        type: 'cubeTexture',
-        path:
-        [
-            'textures/environmentMap-1/px.png',
-            'textures/environmentMap-1/nx.png',
-            'textures/environmentMap-1/py.png',
-            'textures/environmentMap-1/ny.png',
-            'textures/environmentMap-1/pz.png',
-            'textures/environmentMap-1/nz.png'
-        ]
-    },
-    {
-        name: 'environmentMapTexture2',
-        type: 'cubeTexture',
-        path:
-        [
-            'textures/environmentMap-2/px.png',
-            'textures/environmentMap-2/nx.png',
-            'textures/environmentMap-2/py.png',
-            'textures/environmentMap-2/ny.png',
-            'textures/environmentMap-2/pz.png',
-            'textures/environmentMap-2/nz.png'
-        ]
-    },
-    {
-        name: 'environmentMapTexture3',
-        type: 'cubeTexture',
-        path:
-        [
-            'textures/environmentMap-3/px.png',
-            'textures/environmentMap-3/nx.png',
-            'textures/environmentMap-3/py.png',
-            'textures/environmentMap-3/ny.png',
-            'textures/environmentMap-3/pz.png',
-            'textures/environmentMap-3/nz.png'
-        ]
+   {
+        name: 'environmentMap',
+        type: 'texture',
+        path: 'textures/HDRI_Hyperescapismo.png'
     },
     // FONTS
     {

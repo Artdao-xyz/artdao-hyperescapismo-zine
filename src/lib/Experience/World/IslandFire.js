@@ -94,7 +94,7 @@ export default class IslandFire {
 
     setModel() {
         this.model.position.set(positions.islandFire.position.x, positions.islandFire.position.y, positions.islandFire.position.z);
-        this.model.rotation.set(0, Math.PI, 0);
+        this.model.rotation.set(0, -Math.PI / 8, 0);
         this.scene.add(this.model)
 
         this.model.traverse((child) => {

@@ -50,16 +50,16 @@ export default class Raycaster {
                     document.body.style.cursor = 'pointer';
                     // this.currentIntersect.object.scale.set(1.2, 1.2, 1.2);
                     if (this.currentIntersect.object.name == "island-ice") {
-                        this.selectIce.createSelect();
+                        this.selectIce.createSelect(0x0000ff);
                     }
                     if (this.currentIntersect.object.name == "island-desert") {
-                        this.selectDesert.createSelect();
+                        this.selectDesert.createSelect(0xffff00);
                     }
                     if (this.currentIntersect.object.name == "island-fire") {
-                        this.selectFire.createSelect();
+                        this.selectFire.createSelect(0xff0000);
                     }
                     if (this.currentIntersect.object.name == "island-ruins") {
-                        this.selectRuins.createSelect();
+                        this.selectRuins.createSelect(0x00ff00);
                     }
                 }
             }

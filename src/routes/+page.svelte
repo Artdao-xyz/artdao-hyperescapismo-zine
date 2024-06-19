@@ -20,6 +20,7 @@
         
         const scene = sceneStore.subscribe((value) => {
             state = value;
+            console.log(state)
         });
 
         const transitionn = transitionStore.subscribe((value) => {
@@ -55,21 +56,24 @@
 
 <Loading progress={progress} />
 
+<img class="absolute left-1/2 top-2 -translate-x-1/2" src="/logo-hyperescapismo.png" alt="Hyperescapismo">
+
 <canvas bind:this={canvas}></canvas>
 
 
+{#if state != 'idle'}
+    <UI/>
+{/if}
 
-<UI/>
-
-<div class="select-none absolute transparent w-full bottom-0 text-black text-xl flex justify-center items-center z-10 gap-20 p-4">
+<!-- <div class="select-none absolute transparent w-full bottom-0 text-black text-xl flex justify-center items-center z-10 gap-20 p-4">
     <button class="bg-white rounded-3xl px-8 py-1">World</button>    
     <button class="bg-white rounded-3xl px-8 py-1">Artists</button>
     <button class="bg-white rounded-3xl px-8 py-1">Event</button>
     <button class="bg-white rounded-3xl px-8 py-1">Lore</button>
-</div>
+</div> -->
 
 
 
-{#if transition}
+<!-- {#if transition}
     <Transition />
-{/if}
+{/if} -->

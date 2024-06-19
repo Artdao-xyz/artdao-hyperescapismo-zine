@@ -77,6 +77,7 @@ export default class IslandRuins {
     setModel() {
         this.model = this.resource.scene
         this.model.position.set(positions.islandRuins.position.x, positions.islandRuins.position.y, positions.islandRuins.position.z)
+        this.model.rotation.set(0, Math.PI/4, 0);
         this.scene.add(this.model)
 
         this.model.traverse((child) => {
