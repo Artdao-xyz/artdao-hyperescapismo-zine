@@ -29,15 +29,17 @@ export default class Raycaster {
 
         // console.log();
 
+
         let prevScene = 'idle';
                 
-        this.pointerMove();
+        this.pointerMove()
         this.pointerClick();
     }
 
     pointerMove() {
         
         onpointermove = (event) => {
+            
             this.mouse.x = (event.clientX / this.sizes.width) * 2 - 1
             this.mouse.y = - (event.clientY / this.sizes.height) * 2 + 1
             this.raycaster.setFromCamera(this.mouse, this.camera)
@@ -50,34 +52,36 @@ export default class Raycaster {
                     document.body.style.cursor = 'pointer';
                     // this.currentIntersect.object.scale.set(1.2, 1.2, 1.2);
                     if (this.currentIntersect.object.name == "island-ice") {
-                        this.selectIce.createSelect(0x0000ff);
+                        // this.selectIce.createSelect(0x0000ff);
                     }
                     if (this.currentIntersect.object.name == "island-desert") {
-                        this.selectDesert.createSelect(0xffff00);
+                        // this.selectDesert.createSelect(0xffff00);
                     }
                     if (this.currentIntersect.object.name == "island-fire") {
-                        this.selectFire.createSelect(0xff0000);
+                        // this.selectFire.createSelect(0xff0000);
                     }
                     if (this.currentIntersect.object.name == "island-ruins") {
-                        this.selectRuins.createSelect(0x00ff00);
+                        // this.selectRuins.createSelect(0x00ff00);
                     }
                 }
             }
             else {
                 if(this.currentIntersect)
-                {
+                    {
+                    console.log(this.currentIntersect)
+
                     document.body.style.cursor = 'default';
                     if (this.currentIntersect.object.name == "island-ice") {
-                        this.selectIce.removeSelect();
+                        // this.selectIce.removeSelect();
                     }
                     if (this.currentIntersect.object.name == "island-desert") {
-                        this.selectDesert.removeSelect();
+                        // this.selectDesert.removeSelect();
                     }
                     if (this.currentIntersect.object.name == "island-fire") {
-                        this.selectFire.removeSelect();
+                        // this.selectFire.removeSelect();
                     }
                     if (this.currentIntersect.object.name == "island-ruins") {
-                        this.selectRuins.removeSelect();
+                        // this.selectRuins.removeSelect();
                     }
                 }
                 this.currentIntersect = null

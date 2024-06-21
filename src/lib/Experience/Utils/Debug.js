@@ -7,6 +7,14 @@ export default class Debug {
 
         if (this.active) {
             this.ui = new GUI();
+            this.preventClickPropagation()
         }
+    }
+
+    preventClickPropagation() {
+        const domElement = this.ui.domElement;
+        domElement.addEventListener('click', (event) => {
+            event.stopPropagation();
+        });
     }
 }

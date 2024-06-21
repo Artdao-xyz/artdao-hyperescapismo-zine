@@ -18,10 +18,10 @@ export default class Select {
     //     this.experience.scene.add(this.arrowMesh)
     // }
     createSelect(color) {
-        this.sphereGeometry = new THREE.SphereGeometry(0.1, 16, 16);
+        this.sphereGeometry = new THREE.SphereGeometry(0.05, 16, 16);
         this.sphereMaterial = new THREE.MeshStandardMaterial({ color, metalness: 0.5, roughness: 0.1 });
         this.sphereMesh = new THREE.Mesh(this.sphereGeometry, this.sphereMaterial);
-        this.sphereMesh.position.set(this.position.x, 0.5, this.position.z);
+        this.sphereMesh.position.set(this.position.x, 1.0, this.position.z);
         this.experience.scene.add(this.sphereMesh);
     }
 

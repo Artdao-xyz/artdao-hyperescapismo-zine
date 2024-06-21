@@ -94,7 +94,8 @@ export default class IslandFire {
 
     setModel() {
         this.model.position.set(positions.islandFire.position.x, positions.islandFire.position.y, positions.islandFire.position.z);
-        this.model.rotation.set(0, -Math.PI / 8, 0);
+        this.model.rotation.set(0, -Math.PI / 4, 0);
+        this.model.scale.set(0.65, 0.65, 0.65)
         this.scene.add(this.model)
 
         this.model.traverse((child) => {
@@ -118,14 +119,26 @@ export default class IslandFire {
 
     setMaterial() {
         this.material = new THREE.MeshBasicMaterial({ 
-            map: this.textures.color, 
+            map: this.textures.color,
             side: THREE.DoubleSide });
 
         //add texture to island
         this.model.traverse((child) => {
             if (child.isMesh && child.name === 'island-fire' || child.isMesh && child.name === 'portal-fire') {
                 child.material = this.material;
-                child.material.needsUpdate = true
+                child.material.needsUpdate = true;
+            }
+        });
+    }
+
+    updateMaterial() {
+        sceneStore.subscribe((value) => {
+            if (value != "idle" && value != 'island-fire' && value != 'island-desert' && value != 'island-ice' && value != 'island-ruins') {
+                setTimeout(() => {
+                    this.material.color.setScalar(0.1);
+                }, 1000);
+            } else {
+                this.material.color.setScalar(1.0);
             }
         });
     }

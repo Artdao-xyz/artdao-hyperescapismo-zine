@@ -43,8 +43,7 @@
 
         if (currentScene != 'idle') {
             
-            if (currentScene == 'island-ice' || currentScene == 'island-desert' || currentScene == 'island-fire' || currentScene == 'island-ruins') { 
-                
+            if (currentScene == 'island-ice' || currentScene == 'island-desert' || currentScene == 'island-fire' || currentScene == 'island-ruins') {                 
                 
                 currentIndex = currentIndex > 0 ? currentIndex - 1 : 0;
                 if (currentIndex == 0) {
@@ -125,6 +124,7 @@
 
     }
     const moveRight = () => {
+
     
         if (currentScene != 'idle') {
             if (currentScene == 'island-ice' || currentScene == 'island-desert' || currentScene == 'island-fire' || currentScene == 'island-ruins') {
@@ -147,7 +147,11 @@
             else {
                 currentIndex = (currentIndex + 1) % artworks.length;
                 
+                console.log(`lastIsland: ${lastIsland}`);
+
                 if (lastIsland == 'island-fire') {
+                    console.log('move right')
+
                     console.log(`currentIndex: ${currentIndex}`);
                     if (currentIndex == 0) {
                         sceneStore.set("artwork1");
@@ -206,12 +210,31 @@
     }    
 </script>
 
-<div class="absolute top-0 left-1/2 -translate-x-1/2 flex z-10 gap-20 p-4">
+<!-- <div class="absolute top-0 left-1/2 -translate-x-1/2 flex z-10 gap-20 p-4">
     <button disabled={isIdle} bind:this={menuButton} on:click|stopPropagation={ () => sceneStore.set("idle") } class="outline-none select-none { isIdle ? 'text-gray-500 bg-gray-200' : 'text-black bg-white'} text-xs rounded-3xl px-4 py-1" >Go to Menu</button>
     <button disabled={isIsland} bind:this={islandButton} on:click|stopPropagation={ () => sceneStore.set(lastIsland) }  class="outline-none select-none { isIsland ? 'text-gray-500 bg-gray-200' : 'text-black bg-white'} text-xs rounded-3xl px-4 py-1" >Go to Island</button>
-</div>
+</div> -->
 
-<div class="absolute w-full top-1/2 flex justify-between items-center z-10">
-    <button on:click|stopPropagation={moveLeft}><img draggable="false" class="outline-none select-none w-full h-full origin-left scale-200" src="/textures/arrow-left.png" alt="Left Arrow"></button>
-    <button on:click|stopPropagation={moveRight}><img draggable="false" class="outline-none select-none w-full h-full origin-right scale-200" src="/textures/arrow-right.png" alt="Right Arrow"></button>
+<nav class="fixed top-0 left-0 w-full flex items-center justify-between py-2 px-10 z-10">
+    <div class="flex items-center justify-between">
+        <button><img src="/sphere-fire.png" alt="sphere fire"></button>
+        <button><img src="/sphere-ruins.png" alt="sphere ruins"></button>
+        <button><img src="/sphere-ice.png" alt="sphere ice"></button>
+        <button><img src="/sphere-desert.png" alt="sphere desert"></button>
+    </div>
+
+    {#if currentScene == 'idle' || currentScene == 'island-ruins' || currentScene == 'island-ice' || currentScene == 'island-desert' || currentScene == 'island-fire'}
+        <button on:click|stopPropagation={ () => sceneStore.set('idle') } ><img class="" src="/logo-hyperescapismo.png" alt="Hyperescapismo">
+        </button>
+
+    {:else}
+        <div></div>
+    {/if}
+    <button><img src="/connect.png" alt="connect wallet"></button>
+</nav>
+
+
+<div class="absolute w-full top-1/2 px-4 flex justify-between items-center z-10">
+    <button on:click|stopPropagation={moveLeft}><img draggable="false" class="outline-none select-none w-full h-full origin-left scale-200" src="/arrow-left.png" alt="Left Arrow"></button>
+    <button on:click|stopPropagation={moveRight}><img draggable="false" class="outline-none select-none w-full h-full origin-right scale-200" src="/arrow-right.png" alt="Right Arrow"></button>
 </div>

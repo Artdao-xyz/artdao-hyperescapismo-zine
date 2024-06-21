@@ -81,6 +81,7 @@ export default class IslandIce {
         this.model = this.resource.scene;
         this.model.position.set(positions.islandIce.position.x, positions.islandIce.position.y, positions.islandIce.position.z);
         this.model.rotation.set(0, -Math.PI/4, 0);
+        this.model.scale.set(0.65, 0.65, 0.65)
         this.scene.add(this.model)
 
         this.model.traverse((child) => {

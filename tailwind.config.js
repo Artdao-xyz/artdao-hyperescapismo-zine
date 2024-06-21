@@ -2,7 +2,14 @@
 export default {
     content: ['./src/**/*.{html,js,svelte,ts}'],
     theme: {
-      extend: {}
+      extend: {
+        fontFamily: {
+          'monda':
+            "MondaVariable, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+          'garamond':
+            "GaramondVariable, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+        },
+      }
     },
     plugins: []
   };

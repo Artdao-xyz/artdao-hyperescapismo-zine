@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+	font-family: 'MondaVariable';
+	src: url('/fonts/Monda-Variable.woff2');
+	font-style: normal;
+}
+@font-face {
+	font-family: 'GaramondVariable';
+	src: url('/fonts/EBGaramond-Variable.woff2');
+	font-style: normal;
+}
+
 * {
     outline-style: none;
 }

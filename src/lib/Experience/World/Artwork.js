@@ -51,7 +51,7 @@ export default class Artwork {
         this.artworkMesh.name = this.name;
         
         this.artworkMesh.position.set(this.position.x, this.position.y, this.position.z);
-        this.artworkMesh.scale.set(0.5, 0.5, 0.5);
+        this.artworkMesh.scale.set(0.3, 0.3, 0.3);
         this.artworkMesh.rotation.set(0, this.rotation.y, 0);
 
         this.experience.scene.add(this.artworkMesh);

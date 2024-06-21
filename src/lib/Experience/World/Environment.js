@@ -53,11 +53,10 @@ export default class Environment {
     {
         this.environmentMap = {};
         this.environmentMap.intensity = 0.5;
-        this.environmentMap.texture = null;
+        this.environmentMap.texture =  this.resources.items.environmentMap;
         this.environmentMap.enconding = THREE.SRGBColorSpace;
         this.environmentMap.mapping = THREE.EquirectangularReflectionMapping
         
-        // this.scene.environment = this.environmentMap.texture;
         this.scene.background = this.environmentMap.texture;
 
         this.environmentMap.updateMaterial = () => {
@@ -76,28 +75,29 @@ export default class Environment {
     }
 
     environmentUpdate() {
-        this.environmentMap.texture = this.resources.items.environmentMap;
-        this.scene.background = this.environmentMap.texture;
-        // sceneStore.subscribe((value) => {
-        //     if (value == "idle") {
-        //         setTimeout(() => {
-        //             this.environmentMap.texture = null;
-        //             this.scene.background = this.environmentMap.texture;
-        //         }, 1000);
-        //     } else {
-        //         this.environmentMap.texture = this.resources.items.environmentMapTexture4;
-        //         this.scene.background = this.environmentMap.texture;
-        //     }
-        // });
+    
+        sceneStore.subscribe((value) => {
+            if (value != "idle" && value != 'island-fire' && value != 'island-desert' && value != 'island-ice' && value != 'island-ruins') {
+                // Use GSAP to animate the backgroundIntensity to 0.05 over 1 second
+                gsap.to(this.scene, { duration: 1, backgroundIntensity: 0.05 });
+                gsap.to(this.fog.instance.color, {duration: 1, r: 0, g: 0, b: 0});
+            } else {
+                // Immediately set the backgroundIntensity to 1.0 without animation
+                gsap.to(this.scene, { duration: 1, backgroundIntensity: 1.0 });
+                gsap.to(this.fog.instance.color, {duration: 1, r: 0.8, g: 0.8, b: 0.8});
+
+            }
+        });
+        
     }
 
     createFog() {
         this.fog = {}
 
-        this.fog.far = 30;
+        this.fog.far = 15;
         // this.fog.far = 100;
-        this.fog.near = -10;
-        this.fog.colorFog = '#DBE0E2';
+        this.fog.near = 0;
+        this.fog.colorFog = '#CCCCCC';
         this.fog.instance = new THREE.Fog(this.fog.colorFog, this.fog.near, this.fog.far);
 
         this.scene.fog = this.fog.instance;
@@ -105,11 +105,13 @@ export default class Environment {
     }
 
     addFog() {
-        gsap.to(this.fog.instance, {duration: 1, far: 30, ease: "power2.inOut"});
+        gsap.to(this.fog.instance, {duration: 3, far: 4, ease: "power2.inOut"});
+        gsap.to(this.fog.instance, {duration: 3, near: 1, ease: "power2.inOut"});
     }
 
     removeFog() {
-        gsap.to(this.fog.instance, {duration: 1, far: 30, ease: "power2.inOut"});
+        gsap.to(this.fog.instance, {duration: 3, far: 15, ease: "power2.inOut"});
+        gsap.to(this.fog.instance, {duration: 3, near: 0, ease: "power2.inOut"});
         // gsap.to(this.fog.instance, {duration: 1, far: 100, ease: "power2.inOut"});
     }
 

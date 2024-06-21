@@ -78,6 +78,7 @@ export default class IslandRuins {
         this.model = this.resource.scene
         this.model.position.set(positions.islandRuins.position.x, positions.islandRuins.position.y, positions.islandRuins.position.z)
         this.model.rotation.set(0, Math.PI/4, 0);
+        this.model.scale.set(0.65, 0.65, 0.65)
         this.scene.add(this.model)
 
         this.model.traverse((child) => {
@@ -115,7 +116,7 @@ export default class IslandRuins {
             map: this.textures.color, 
             alphaMap: this.textures.alphaMap,
             transparent: true, 
-            alphaTest: 0.1, 
+            alphaTest: 0.5, 
             side: THREE.DoubleSide 
         });
 

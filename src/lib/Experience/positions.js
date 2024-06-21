@@ -1,10 +1,10 @@
 const positions  = 
     {
         islandIce: {
-            position: { x: 4.5, y: 0.0, z: -3.5 },
+            position: { x: 2.5, y: 0.0, z: -2.5 },
             artwork6: {
-                position: { x: -0.05, y: 0.25, z: 1.25 },
-                rotation: { x: 0, y: -0.2383, z: 0 },
+                position: { x: 0.35, y: 0.25, z: 1.22 },
+                rotation: { x: 0, y: 0.25, z: 0 },
                 camera: { x: -14.89, y: 0.265, z: 0.635 },
             },
             artwork7: {
@@ -29,7 +29,7 @@ const positions  =
             },
         },
         islandDesert: {
-            position: { x: 2.75, y: -0.0,  z: 2.0 },
+            position: { x: 1.5, y: -0.0,  z: 1.75 },
             artwork11: {
                 position: { x: -1.0, y: 0.25, z: 0.85 },
                 rotation: { x: 0, y: -1.1018, z: 0 },
@@ -57,11 +57,11 @@ const positions  =
             },
         },
         islandFire: {
-            position: { x: -2.75, y: -0.0,  z: 2.0 },
+            position: { x: -1.75, y: -0.0,  z: 1.75 },
             artwork1: {
                 position: { x: 1.0, y: 0.3, z: -0.1 },
                 rotation: { x: 0, y: 1.57, z: 0 },
-                camera: { x: 4.12, y: 0.33, z: 0.085 },
+                camera: { x: -1.8, y: 0.25, z: 1.6 },            
             },
             artwork2: {
                 position: { x: 0.3, y: 0.3, z: 1.0 },
@@ -85,7 +85,7 @@ const positions  =
             },
         },
         islandRuins: {
-            position: { x: -4.0, y: 0.0, z: -3.25},
+            position: { x: -2.5, y: 0.0, z: -2.75},
             artwork16: {
                 position: { x: -0.57, y: 0.25, z: 1.12 },
                 rotation: { x: 0, y: -1.3896, z: 0 },

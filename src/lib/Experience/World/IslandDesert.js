@@ -78,6 +78,7 @@ export default class IslandDesert {
     setModel() {
         this.model.position.set(positions.islandDesert.position.x, positions.islandDesert.position.y, positions.islandDesert.position.z);
         this.model.rotation.set(0, Math.PI, 0);
+        this.model.scale.set(0.65, 0.65, 0.65)
         this.scene.add(this.model)
 
         this.model.traverse((child) => {
