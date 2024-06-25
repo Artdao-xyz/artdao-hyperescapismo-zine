@@ -59,10 +59,4 @@
       background-color: #000000;
   }
 
-  .custom-mask {
-      -webkit-mask-image: url('lore.png');
-      -webkit-mask-size: cover;
-      mask-image: url('lore.png');
-      mask-size: cover;
-  }
 </style>

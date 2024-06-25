@@ -15,22 +15,20 @@ export default class Raycaster {
         this.mouse = new THREE.Vector2()
         this.raycasterEnabled = true;
         this.raycaster = new THREE.Raycaster()
-        this.currentIntersect = null
-        // this.rayOrigin = new THREE.Vector3(this.camera.position.x, this.camera.position.y, this.camera.position.z)
-        // this.rayDirection = new THREE.Vector3(10, 0, 0)
-        // this.rayDirection.normalize()
+        this.currentIntersect = null;
+        this.prevIntersect = 'idle';
+        this.unsubscribe = null;
 
-        sceneStore.subscribe((value) => {this.scene = value} );
+        if (this.unsubscribe) {
+            this.unsubscribe();
+        }
+
+        this.unsubscribe = sceneStore.subscribe((value) => { this.prevIntersect = value } );
 
         this.selectIce = new Select(this.targets[0].position);
         this.selectDesert = new Select(this.targets[1].position);
         this.selectFire = new Select(this.targets[2].position);
         this.selectRuins = new Select(this.targets[3].position);
-
-        // console.log();
-
-
-        let prevScene = 'idle';
                 
         this.pointerMove()
         this.pointerClick();
@@ -99,20 +97,16 @@ export default class Raycaster {
                 
                 this.currentIntersect = intersects[0]
 
-                if (this.currentIntersect.object.name == "island-ice") {
+                if (this.prevIntersect !='island-ice' && this.currentIntersect.object.name == "island-ice") {
                     sceneStore.set("island-ice");
                 }
-                if (this.currentIntersect.object.name == "island-desert") {
+                if (this.prevIntersect !='island-desert' && this.currentIntersect.object.name == "island-desert") {
                     sceneStore.set("island-desert");                }
-                if (this.scene !='island-fire' && this.currentIntersect.object.name == "island-fire") {
-                    // console.log('island fire!!!!!!!!')
+                if (this.prevIntersect !='island-fire' && this.currentIntersect.object.name == "island-fire") {
                     sceneStore.set("island-fire");
                 }
-                if (this.currentIntersect.object.name == "island-ruins") {
+                if (this.prevIntersect !='island-ruins' && this.currentIntersect.object.name == "island-ruins") {
                     sceneStore.set("island-ruins");
-                }
-                if (this.currentIntersect.object.name == "artwork1") {
-                    sceneStore.set("artwork1");
                 }
                 if (this.currentIntersect.object.name == "artwork1") {
                     sceneStore.set("artwork1");
@@ -185,6 +179,11 @@ export default class Raycaster {
         
         }
     }
-}
+    }
 
+    destroy() {
+        if (this.unsubscribe) {
+          this.unsubscribe();
+        }
+    }
 }
