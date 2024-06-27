@@ -61,27 +61,27 @@ const positions  =
             artwork1: {
                 position: { x: 1.0, y: 0.3, z: -0.1 },
                 rotation: { x: 0, y: 1.57, z: 0 },
-                camera: { x: -1.8, y: 0.25, z: 1.6 },            
+                camera: { x: -1.63, y: 0.22, z: 1.83 },            
             },
             artwork2: {
                 position: { x: 0.3, y: 0.3, z: 1.0 },
                 rotation: { x: 0, y: 0, z: 0 },
-                camera: { x: -1.6, y: 0.25, z: 1.9 },
+                camera: { x: -1.71, y: 0.25, z: 1.98 },
             },
             artwork3: {
                 position: { x: -0.65, y: 0.35, z: 1.1 },
                 rotation: { x: 0, y: -0.4851, z: 0 },
-                camera: { x: -1.97, y: 0.25, z: 1.75 },
+                camera: { x: -2.0, y: 0.25, z: 1.8 },
             },
             artwork4: {
                 position: { x: -1.14, y: 0.35, z: -0.1 },
                 rotation: { x: 0, y: 0.9129, z: 0 },
-                camera: { x: -2.15, y: 0.25, z: 1.85 },
+                camera: { x: -2.2, y: 0.25, z: 1.75 },
             },
             artwork5: {
                 position: { x: -0.7, y: 0.3, z: -0.9 },
                 rotation: { x: 0, y: 0.9129, z: 0 },
-                camera: { x: -1.6, y: 0.25, z: 1.6 },
+                camera: { x: -1.6, y: 0.25, z: 1.55 },
             },
         },
         islandRuins: {

@@ -25,13 +25,14 @@
   <div bind:this={progressBarContainer} class="bg-white text-white font-monda fixed inset-0 flex justify-center items-center z-50 bg-cover bg-center" style="background-image: url('/bg-lore.png');">
     <div class="relative w-fit h-screen flex flex-col justify-center items-center ">
         <img class="max-w-full h-auto max-h-full" src="/lore.png" alt="Lore">
-        <div class="absolute inset-0 flex flex-col justify-center items-center px-24 2xl:px-32 gap-4 ">
-            <p class="text-center mt-4">
+        <div class="absolute inset-0 flex flex-col justify-center items-center px-24 xl:px-28 gap-4 ">
+            <img src="/logo-hyperescapismo.svg" alt="Hyperescapismo">
+            <p class="text-center text-sm xl:text-base">
                 O ArtDAO tem trabalhado nos últimos meses em nossa própria infraestrutura de mercado na plataforma Fuel, uma nova Layer-2 que se expande a partir do Ethereum. Acreditamos que isso oferece uma nova e poderosa oportunidade para ampliar as possibilidades da arte digital no Ethereum.
             </p>
-            <div class="w-full text-center">
+            <div class="w-fit text-center">
               <hr class="outline-[1px]">
-              <button on:click|stopPropagation={()=>{ enter = true} } class="font-garamond py-2 text-2xl tracking-widest">ENTER THE WORLD</button>
+              <button on:click|stopPropagation={()=>{ enter = true} } class="font-garamond px-3 py-1 tracking-wide">ENTER THE WORLD</button>
               <hr class="outline-[1px]">
             </div>
         </div>
@@ -44,7 +45,7 @@
 <style>
   /* Custom styles for progress bar */
   progress.custom-progress-bar::-webkit-progress-bar {
-      background-color: #f3f4f6;
+      background-color: #7e7e7e;
   }
 
   progress.custom-progress-bar::-webkit-progress-value {

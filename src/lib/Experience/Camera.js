@@ -71,40 +71,42 @@ export default class Camera {
 
     cameraUpdate(value) {
 
+        let offset = 0.025;
+
         if (value == "idle" ||  value == "island-ice" || value == "island-desert" || value == "island-fire" || value == "island-ruins") {
             
             if (value == "idle") {
                 this.newlookAt = new THREE.Vector3(0, 0.0, 0);
                 gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
-                gsap.to(this.instance.position, { duration: 2, x: 0., y: 1.68, z: 6.0, ease: "power2.inOut" });
+                gsap.to(this.instance.position, { duration: 2, x: 0., y: 2.62, z: 6.4, ease: "power2.inOut" });
                 // gsap.to(this.instance.position, { duration: 1, x: 0, y: 0, z: 70 / this.instance.aspect, ease: "power2.inOut" });
-                this.controls.enabled = true;
+                this.controls.enabled = false;
             }
             if (value == "island-ice") {
                 this.newlookAt = this.experience.world.islandIce.model.position; 
                 gsap.to(this.controls.target, { duration: 2, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
-                gsap.to(this.instance.position, { duration: 3, x: 0.93, y: 0.37, z: -1.1, ease: "power2.inOut" });
+                gsap.to(this.instance.position, { duration: 3, x: 0.93, y: 0.95, z: -1.1, ease: "power2.inOut" });
                 this.controls.enabled = true;
             }
 
             if (value == "island-desert") {
                 this.newlookAt = this.experience.world.islandDesert.model.position; 
                 gsap.to(this.controls.target, { duration: 2, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
-                gsap.to(this.instance.position, { duration: 3, x: 1.75, y: 0.45, z: -0.7, ease: "power2.inOut" });
+                gsap.to(this.instance.position, { duration: 3, x: 1.75, y: 1.25, z: -0.7, ease: "power2.inOut" });
                 this.controls.enabled = true;
             }
 
             if (value == "island-fire") {
                 this.newlookAt = this.experience.world.islandFire.model.position; 
                 gsap.to(this.controls.target, { duration: 2, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
-                gsap.to(this.instance.position, { duration: 3, x: -0.0, y: 0.25, z: 0.0, ease: "power2.inOut" });
+                gsap.to(this.instance.position, { duration: 3, x: -0.12, y: 1.22, z: 0.37, ease: "power2.inOut" });
                 this.controls.enabled = true;
             }
 
             if (value == "island-ruins") {
                 this.newlookAt = this.experience.world.islandRuins.model.position; 
                 gsap.to(this.controls.target, { duration: 2, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
-                gsap.to(this.instance.position, { duration: 3, x: -1, y: 0.25, z: -1.0, ease: "power2.inOut" });
+                gsap.to(this.instance.position, { duration: 3, x: -1, y: 1.22, z: -1.2, ease: "power2.inOut" });
                 this.controls.enabled = true;
             }
 
@@ -119,7 +121,7 @@ export default class Camera {
                 let getWorldPosition = new THREE.Vector3();
                 this.experience.world.islandFire.artworks[0].getWorldPosition(getWorldPosition);
                 this.newlookAt = getWorldPosition;
-                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y + 0.01, z: this.newlookAt.z, ease: "power2.inOut" });
+                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y + offset, z: this.newlookAt.z, ease: "power2.inOut" });
                 gsap.to(this.instance.position, { duration: 2, x: positions.islandFire.artwork1.camera.x, y: positions.islandFire.artwork1.camera.y, z: positions.islandFire.artwork1.camera.z, ease: "power2.inOut"});
                 this.controls.enabled = false;
             }
@@ -127,7 +129,7 @@ export default class Camera {
                 let getWorldPosition = new THREE.Vector3();
                 this.experience.world.islandFire.artworks[1].getWorldPosition(getWorldPosition);
                 this.newlookAt = getWorldPosition;
-                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
+                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y + offset, z: this.newlookAt.z, ease: "power2.inOut" });
                 gsap.to(this.instance.position, { duration: 2, x: positions.islandFire.artwork2.camera.x, y: positions.islandFire.artwork2.camera.y, z: positions.islandFire.artwork2.camera.z, ease: "power2.inOut"});
                 this.controls.enabled = false;
             }
@@ -135,7 +137,7 @@ export default class Camera {
                 let getWorldPosition = new THREE.Vector3();
                 this.experience.world.islandFire.artworks[2].getWorldPosition(getWorldPosition);
                 this.newlookAt = getWorldPosition;
-                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
+                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y + offset, z: this.newlookAt.z, ease: "power2.inOut" });
                 gsap.to(this.instance.position, { duration: 2, x: positions.islandFire.artwork3.camera.x, y: positions.islandFire.artwork3.camera.y, z: positions.islandFire.artwork3.camera.z, ease: "power2.inOut"});
                 this.controls.enabled = false;
             }
@@ -143,7 +145,7 @@ export default class Camera {
                 let getWorldPosition = new THREE.Vector3();
                 this.experience.world.islandFire.artworks[3].getWorldPosition(getWorldPosition);
                 this.newlookAt = getWorldPosition;
-                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
+                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y + offset, z: this.newlookAt.z, ease: "power2.inOut" });
                 gsap.to(this.instance.position, { duration: 2, x: positions.islandFire.artwork4.camera.x, y: positions.islandFire.artwork4.camera.y, z: positions.islandFire.artwork4.camera.z, ease: "power2.inOut"});
                 this.controls.enabled = false;
             }
@@ -151,7 +153,7 @@ export default class Camera {
                 let getWorldPosition = new THREE.Vector3();
                 this.experience.world.islandFire.artworks[4].getWorldPosition(getWorldPosition);
                 this.newlookAt = getWorldPosition;
-                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
+                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y + offset, z: this.newlookAt.z, ease: "power2.inOut" });
                 gsap.to(this.instance.position, { duration: 2, x: positions.islandFire.artwork5.camera.x, y: positions.islandFire.artwork5.camera.y, z: positions.islandFire.artwork5.camera.z, ease: "power2.inOut"});
                 this.controls.enabled = false;
             }
@@ -159,7 +161,7 @@ export default class Camera {
                 let getWorldPosition = new THREE.Vector3();
                 this.experience.world.islandIce.artworks[0].getWorldPosition(getWorldPosition);
                 this.newlookAt = getWorldPosition;
-                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
+                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y + offset, z: this.newlookAt.z, ease: "power2.inOut" });
                 gsap.to(this.instance.position, { duration: 2, x: positions.islandIce.artwork6.camera.x, y: positions.islandIce.artwork6.camera.y, z: positions.islandIce.artwork6.camera.z, ease: "power2.inOut"});
                 this.controls.enabled = false;
             }
@@ -167,7 +169,7 @@ export default class Camera {
                 let getWorldPosition = new THREE.Vector3();
                 this.experience.world.islandIce.artworks[1].getWorldPosition(getWorldPosition);
                 this.newlookAt = getWorldPosition;
-                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
+                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y + offset, z: this.newlookAt.z, ease: "power2.inOut" });
                 gsap.to(this.instance.position, { duration: 2, x: positions.islandIce.artwork7.camera.x, y: positions.islandIce.artwork7.camera.y, z: positions.islandIce.artwork7.camera.z, ease: "power2.inOut"});
                 this.controls.enabled = false;
             }
@@ -175,7 +177,7 @@ export default class Camera {
                 let getWorldPosition = new THREE.Vector3();
                 this.experience.world.islandIce.artworks[2].getWorldPosition(getWorldPosition);
                 this.newlookAt = getWorldPosition;
-                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
+                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y + offset, z: this.newlookAt.z, ease: "power2.inOut" });
                 gsap.to(this.instance.position, { duration: 2, x: positions.islandIce.artwork8.camera.x, y: positions.islandIce.artwork8.camera.y, z: positions.islandIce.artwork8.camera.z, ease: "power2.inOut"});
                 this.controls.enabled = false;
             }
@@ -183,7 +185,7 @@ export default class Camera {
                 let getWorldPosition = new THREE.Vector3();
                 this.experience.world.islandIce.artworks[3].getWorldPosition(getWorldPosition);
                 this.newlookAt = getWorldPosition;
-                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
+                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y + offset, z: this.newlookAt.z, ease: "power2.inOut" });
                 gsap.to(this.instance.position, { duration: 2, x: positions.islandIce.artwork9.camera.x, y: positions.islandIce.artwork9.camera.y, z: positions.islandIce.artwork9.camera.z, ease: "power2.inOut"});
                 this.controls.enabled = false;
             }
@@ -191,7 +193,7 @@ export default class Camera {
                 let getWorldPosition = new THREE.Vector3();
                 this.experience.world.islandIce.artworks[4].getWorldPosition(getWorldPosition);
                 this.newlookAt = getWorldPosition;
-                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
+                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y + offset, z: this.newlookAt.z, ease: "power2.inOut" });
                 gsap.to(this.instance.position, { duration: 2, x: positions.islandIce.artwork10.camera.x, y: positions.islandIce.artwork10.camera.y, z: positions.islandIce.artwork10.camera.z, ease: "power2.inOut"});
                 this.controls.enabled = false;
             }
@@ -199,7 +201,7 @@ export default class Camera {
                 let getWorldPosition = new THREE.Vector3();
                 this.experience.world.islandDesert.artworks[0].getWorldPosition(getWorldPosition);
                 this.newlookAt = getWorldPosition;
-                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
+                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y + offset, z: this.newlookAt.z, ease: "power2.inOut" });
                 gsap.to(this.instance.position, { duration: 2, x: positions.islandDesert.artwork11.camera.x, y: positions.islandDesert.artwork11.camera.y, z: positions.islandDesert.artwork11.camera.z, ease: "power2.inOut"});
                 this.controls.enabled = false;
             }
@@ -207,7 +209,7 @@ export default class Camera {
                 let getWorldPosition = new THREE.Vector3();
                 this.experience.world.islandDesert.artworks[1].getWorldPosition(getWorldPosition);
                 this.newlookAt = getWorldPosition;
-                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
+                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y + offset, z: this.newlookAt.z, ease: "power2.inOut" });
                 gsap.to(this.instance.position, { duration: 2, x: positions.islandDesert.artwork12.camera.x, y: positions.islandDesert.artwork12.camera.y, z: positions.islandDesert.artwork12.camera.z, ease: "power2.inOut"});
                 this.controls.enabled = false;
             }
@@ -215,7 +217,7 @@ export default class Camera {
                 let getWorldPosition = new THREE.Vector3();
                 this.experience.world.islandDesert.artworks[2].getWorldPosition(getWorldPosition);
                 this.newlookAt = getWorldPosition;
-                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
+                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y + offset, z: this.newlookAt.z, ease: "power2.inOut" });
                 gsap.to(this.instance.position, { duration: 2, x: positions.islandDesert.artwork13.camera.x, y: positions.islandDesert.artwork13.camera.y, z: positions.islandDesert.artwork13.camera.z, ease: "power2.inOut"});
                 this.controls.enabled = false;
             }
@@ -223,7 +225,7 @@ export default class Camera {
                 let getWorldPosition = new THREE.Vector3();
                 this.experience.world.islandDesert.artworks[3].getWorldPosition(getWorldPosition);
                 this.newlookAt = getWorldPosition;
-                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
+                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y + offset, z: this.newlookAt.z, ease: "power2.inOut" });
                 gsap.to(this.instance.position, { duration: 2, x: positions.islandDesert.artwork14.camera.x, y: positions.islandDesert.artwork14.camera.y, z: positions.islandDesert.artwork14.camera.z, ease: "power2.inOut"});
                 this.controls.enabled = false;
             }
@@ -231,7 +233,7 @@ export default class Camera {
                 let getWorldPosition = new THREE.Vector3();
                 this.experience.world.islandDesert.artworks[4].getWorldPosition(getWorldPosition);
                 this.newlookAt = getWorldPosition;
-                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
+                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y + offset, z: this.newlookAt.z, ease: "power2.inOut" });
                 gsap.to(this.instance.position, { duration: 2, x: positions.islandDesert.artwork15.camera.x, y: positions.islandDesert.artwork15.camera.y, z: positions.islandDesert.artwork15.camera.z, ease: "power2.inOut"});
                 this.controls.enabled = false;
             }
@@ -239,7 +241,7 @@ export default class Camera {
                 let getWorldPosition = new THREE.Vector3();
                 this.experience.world.islandRuins.artworks[0].getWorldPosition(getWorldPosition);
                 this.newlookAt = getWorldPosition;
-                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
+                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y + offset, z: this.newlookAt.z, ease: "power2.inOut" });
                 gsap.to(this.instance.position, { duration: 2, x: positions.islandRuins.artwork16.camera.x, y: positions.islandRuins.artwork16.camera.y, z: positions.islandRuins.artwork16.camera.z, ease: "power2.inOut"});
                 this.controls.enabled = false;
             }
@@ -247,7 +249,7 @@ export default class Camera {
                 let getWorldPosition = new THREE.Vector3();
                 this.experience.world.islandRuins.artworks[1].getWorldPosition(getWorldPosition);
                 this.newlookAt = getWorldPosition;
-                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
+                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y + offset, z: this.newlookAt.z, ease: "power2.inOut" });
                 gsap.to(this.instance.position, { duration: 2, x: positions.islandRuins.artwork17.camera.x, y: positions.islandRuins.artwork17.camera.y, z: positions.islandRuins.artwork17.camera.z, ease: "power2.inOut"});
                 this.controls.enabled = false;
             }
@@ -255,7 +257,7 @@ export default class Camera {
                 let getWorldPosition = new THREE.Vector3();
                 this.experience.world.islandRuins.artworks[2].getWorldPosition(getWorldPosition);
                 this.newlookAt = getWorldPosition;
-                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
+                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y + offset, z: this.newlookAt.z, ease: "power2.inOut" });
                 gsap.to(this.instance.position, { duration: 2, x: positions.islandRuins.artwork18.camera.x, y: positions.islandRuins.artwork18.camera.y, z: positions.islandRuins.artwork18.camera.z, ease: "power2.inOut"});
                 this.controls.enabled = false;
             }
@@ -263,7 +265,7 @@ export default class Camera {
                 let getWorldPosition = new THREE.Vector3();
                 this.experience.world.islandRuins.artworks[3].getWorldPosition(getWorldPosition);
                 this.newlookAt = getWorldPosition;
-                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
+                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y + offset, z: this.newlookAt.z, ease: "power2.inOut" });
                 gsap.to(this.instance.position, { duration: 2, x: positions.islandRuins.artwork19.camera.x, y: positions.islandRuins.artwork19.camera.y, z: positions.islandRuins.artwork19.camera.z, ease: "power2.inOut"});
                 this.controls.enabled = false;
             }
@@ -271,7 +273,7 @@ export default class Camera {
                 let getWorldPosition = new THREE.Vector3();
                 this.experience.world.islandRuins.artworks[4].getWorldPosition(getWorldPosition);
                 this.newlookAt = getWorldPosition;
-                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y, z: this.newlookAt.z, ease: "power2.inOut" });
+                gsap.to(this.controls.target, { duration: 1, x: this.newlookAt.x, y: this.newlookAt.y + offset, z: this.newlookAt.z, ease: "power2.inOut" });
                 gsap.to(this.instance.position, { duration: 2, x: positions.islandRuins.artwork20.camera.x, y: positions.islandRuins.artwork20.camera.y, z: positions.islandRuins.artwork20.camera.z, ease: "power2.inOut"});
                 this.controls.enabled = false;
             }

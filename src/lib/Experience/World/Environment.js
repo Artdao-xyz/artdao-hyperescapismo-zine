@@ -83,8 +83,8 @@ export default class Environment {
                 gsap.to(this.fog.instance.color, {duration: 1, r: 0, g: 0, b: 0});
             } else {
                 // Immediately set the backgroundIntensity to 1.0 without animation
-                gsap.to(this.scene, { duration: 1, backgroundIntensity: 1.0 });
-                gsap.to(this.fog.instance.color, {duration: 1, r: 0.8, g: 0.8, b: 0.8});
+                gsap.to(this.scene, { duration: 1, backgroundIntensity: 0.65 });
+                gsap.to(this.fog.instance.color, {duration: 1, r: 88/255, g: 100/255, b: 105/255});
 
             }
         });
@@ -97,7 +97,7 @@ export default class Environment {
         this.fog.far = 15;
         // this.fog.far = 100;
         this.fog.near = 0;
-        this.fog.colorFog = '#CCCCCC';
+        this.fog.colorFog = '#7a8e99';
         this.fog.instance = new THREE.Fog(this.fog.colorFog, this.fog.near, this.fog.far);
 
         this.scene.fog = this.fog.instance;
@@ -105,8 +105,8 @@ export default class Environment {
     }
 
     addFog() {
-        gsap.to(this.fog.instance, {duration: 3, far: 4, ease: "power2.inOut"});
-        gsap.to(this.fog.instance, {duration: 3, near: 1, ease: "power2.inOut"});
+        gsap.to(this.fog.instance, {duration: 3, far: 4.5, ease: "power2.inOut"});
+        gsap.to(this.fog.instance, {duration: 3, near: 0.75, ease: "power2.inOut"});
     }
 
     removeFog() {
