@@ -1,6 +1,7 @@
 <script>
     import { fade } from 'svelte/transition';
     import { sceneStore } from '$lib/store.js';
+    import { get } from 'svelte/store';
 
     let currentIndex = 0;
 
@@ -16,7 +17,6 @@
         if (index >= 5 && index < 10) return [5, 9];
         if (index >= 10 && index < 15) return [10, 14];
         if (index >= 15 && index < 20) return [15, 19];
-        return [0, 4]; // Default to the first range
     };
 
     const moveRight = () => {
@@ -30,6 +30,13 @@
         currentIndex = (currentIndex - 1 < start) ? end : currentIndex - 1;
         sceneStore.set(artworks[currentIndex]);
     };
+
+    // Reactive statement to update currentIndex based on sceneStore
+    $: {
+        const currentArtwork = $sceneStore;
+        currentIndex = artworks.indexOf(currentArtwork);
+    }
+
 </script>
 
 {#if $sceneStore.startsWith('artwork')}
