@@ -30,6 +30,7 @@
 	"dependencies": {
 		"gsap": "^3.12.5",
 		"lil-gui": "^0.19.1",
+		"postprocessing": "^6.35.5",
 		"three": "^0.160.0"
 	}
 }

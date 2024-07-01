@@ -17,12 +17,12 @@
 <button class="relative w-28" on:click|stopPropagation={toggleConnection}>
     <img src="/connected.png" alt="connected wallet" class="w-full h-full">
     <span class="font-monda font-bold text-black text-xs absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center gap-1 w-full px-4">
-        <img src="/user.svg" alt="icon"> <!-- Adjust the image source and size as needed -->
+        <img draggable="false" src="/user.svg" alt="icon"> <!-- Adjust the image source and size as needed -->
         <span class="truncate">{walletAddress}</span>
     </span>
 </button>
 {:else}
     <button class="w-28" on:click={toggleConnection}>
-        <img src="/connect.png" alt="connect wallet" >
+        <img draggable="false" src="/connect.png" alt="connect wallet" >
     </button>
 {/if}

@@ -44,14 +44,23 @@ export default class Artwork {
     createArtwork() {
         this.setTexture();
 
-        this.artworkGeometry = new THREE.PlaneGeometry(1 * this.ratio, 1);
+        // Determine if the aspect ratio is landscape or portrait
+        if (this.ratio > 1) {
+            // Landscape (16:9 or similar)
+            this.artworkGeometry = new THREE.PlaneGeometry(this.ratio, 1);
+        } else {
+            // Portrait (9:16 or similar)
+            this.artworkGeometry = new THREE.PlaneGeometry(1, 1 / this.ratio);
+        };
+
+        // console.log('this.artworkGeometry', this.artworkGeometry)
         this.artworkMaterial = new THREE.MeshBasicMaterial({ map: this.texture, side: THREE.DoubleSide, });
 
         this.artworkMesh = new THREE.Mesh(this.artworkGeometry, this.artworkMaterial);
         this.artworkMesh.name = this.name;
         
         this.artworkMesh.position.set(this.position.x, this.position.y, this.position.z);
-        this.artworkMesh.scale.set(0.3, 0.3, 0.3);
+        this.artworkMesh.scale.set(0.2, 0.2, 0.2);
         this.artworkMesh.rotation.set(0, this.rotation.y, 0);
 
         this.experience.scene.add(this.artworkMesh);

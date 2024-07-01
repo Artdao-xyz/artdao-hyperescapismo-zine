@@ -18,7 +18,7 @@
 <Logo/>
 
 <!-- CONNECT BUTTON -->
-<div transition:fade={{ duration: 300 }} class="absolute right-8 top-7 flex items-center">
+<div in:fade={{ delay: 2000 , duration: 1000 }} class="absolute right-8 top-7 flex items-center">
     <Toggle/>
     <ConnectWallet/>
 </div>

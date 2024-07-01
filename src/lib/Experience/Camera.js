@@ -25,7 +25,7 @@ export default class Camera {
         this.setOrbitControls();
 
         this.unsubscribe = sceneStore.subscribe((value) => {
-            console.log('this.scene from the camera', this.scene)
+            // console.log('this.scene from the camera', this.scene)
             this.cameraUpdate(value);
         })
 

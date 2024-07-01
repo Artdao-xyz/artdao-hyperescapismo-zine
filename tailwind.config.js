@@ -10,6 +10,9 @@ export default {
           'garamond':
             "GaramondVariable, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
         },
+        boxShadow: {
+          'cloud': 'inset 0px 0px 5.0px 1px rgb(0 0 0 / 0.05)',
+        },
       }
     },
     plugins: [daisyui]

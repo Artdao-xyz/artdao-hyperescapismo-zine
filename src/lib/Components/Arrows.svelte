@@ -40,7 +40,7 @@
 </script>
 
 {#if $sceneStore.startsWith('artwork')}
-    <div transition:fade={{ duration: 300 }} class="absolute w-full top-1/2 px-4 flex justify-between items-center z-10">
+    <div in:fade={{ delay: 2000 , duration: 1000 }} class="absolute w-full top-1/2 px-4 flex justify-between items-center z-10">
         <button on:click|stopPropagation={moveLeft}><img draggable="false" class="outline-none w-full h-full origin-left scale-200" src="/arrow-left.png" alt="Left Arrow"></button>
         <button on:click|stopPropagation={moveRight}><img draggable="false" class="outline-none w-full h-full origin-right scale-200" src="/arrow-right.png" alt="Right Arrow"></button>
     </div>

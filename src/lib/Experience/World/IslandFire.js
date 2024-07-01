@@ -135,7 +135,7 @@ export default class IslandFire {
         sceneStore.subscribe((value) => {
             if (value != "idle" && value != 'island-fire' && value != 'island-desert' && value != 'island-ice' && value != 'island-ruins') {
                 setTimeout(() => {
-                    this.material.color.setScalar(0.1);
+                    this.material.color.setScalar(0.05);
                 }, 1000);
             } else {
                 this.material.color.setScalar(1.0);

@@ -12,7 +12,7 @@
         // if (progress == 100) {
         if (progress == 100 && enter) {
             //make a delay of two seconds to show the progress bar at 100%
-            console.log('ready')
+            // console.log('ready')
             setTimeout(() => {
                 progressBarContainer.style.display = 'none';
             }, 1000);
@@ -22,7 +22,9 @@
   </script>
   
   <!-- Loading Bar -->
-  <div bind:this={progressBarContainer} class="bg-white text-white font-monda fixed inset-0 flex justify-center items-center z-50 bg-cover bg-center" style="background-image: url('/bg-lore.png');">
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <div on:click|stopPropagation bind:this={progressBarContainer} class="cursor-default bg-white text-white font-monda fixed inset-0 flex justify-center items-center z-50 bg-cover bg-center" style="background-image: url('/bg-lore.png');">
     <div class="relative w-fit h-screen flex flex-col justify-center items-center ">
         <img class="max-w-full h-auto max-h-full" src="/lore.png" alt="Lore">
         <div class="absolute inset-0 flex flex-col justify-center items-center px-24 xl:px-28 gap-4 ">
@@ -32,7 +34,11 @@
             </p>
             <div class="w-fit text-center">
               <hr class="outline-[1px]">
-              <button on:click|stopPropagation={()=>{ enter = true} } class="font-garamond px-3 py-1 tracking-wide">ENTER THE WORLD</button>
+              <div class="flex items-center gap-3 group">
+                <img class="invisible group-hover:visible" src="/enter.svg" alt="enter the game">
+                <button on:click|stopPropagation={()=>{ enter = true} } class="font-garamond  py-1 tracking-wide">ENTER THE WORLD</button>
+                <img class="invisible group-hover:visible rotate-180" src="/enter.svg" alt="enter the game">
+              </div>
               <hr class="outline-[1px]">
             </div>
         </div>

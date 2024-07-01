@@ -18,7 +18,7 @@ export default class IslandIce {
         this.model = this.resource.scene;
         this.artworks = [];
 
-        console.log(positions.islandIce);
+        // console.log(positions.islandIce);
 
         this.addArtworks()
 

@@ -1,6 +1,5 @@
 <script>
     import { fade } from 'svelte/transition';
-    import { onMount } from 'svelte';
     import { sceneStore } from '$lib/store.js';
 
     let showDragScreen = false;
@@ -32,7 +31,7 @@
             clearTimeout(timer); // Clear any existing timer
             timer = setTimeout(() => {
                 showDragScreen = false;
-            }, 10000);
+            }, 5000);
         }
     }
 
@@ -40,9 +39,9 @@
 
 {#each scenes as scene}
     {#if $sceneStore === scene.id}
-        <div transition:fade={{ duration: 300 }} class="absolute bottom-4 left-1/2 -translate-x-1/2">
-            <img class="relative" src="/island-info.png" alt="island info">
-            <img class="absolute -top-5 left-1/2 -translate-x-1/2" src={`${scene.id}-icon.png`} alt="{scene.id} icon">
+        <div in:fade={{ delay: 2000 , duration: 1000 }} class="absolute bottom-4 left-1/2 -translate-x-1/2">
+            <img draggable="false" class="select-none relative" src="/island-info.png" alt="island info">
+            <img draggable="false" class="select-none absolute -top-5 left-1/2 -translate-x-1/2" src={`${scene.id}-icon.png`} alt="{scene.id} icon">
             <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full space-y-5 p-4 text-center">
                 <p class="text-center text-white text-sm font-monda font-light leading-tight tracking-wide">
                     {scene.text}
@@ -56,7 +55,7 @@
         </div>
         <!-- DRAG -->
         {#if showDragScreen}
-            <div transition:fade={{ duration: 300 }} class="absolute left-1/2 -translate-x-1/2 top-1/2 text-white text-sm font-monda tracking-wide drop-shadow-[0_5px_5px_rgba(255,255,255,0.5)]">drag screen to Navigate around the island</div>
+            <div in:fade={{ delay: 2000 , duration: 1000 }} class="select-none absolute left-1/2 -translate-x-1/2 top-1/2 text-white text-sm font-monda tracking-wide drop-shadow-[0_5px_5px_rgba(255,255,255,0.5)]">drag screen to Navigate around the island</div>
         {/if}
     {/if}
 {/each} 
