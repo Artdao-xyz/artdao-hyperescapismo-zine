@@ -1,25 +1,23 @@
 <script>
-    import '/src/style.css';
-    import { onMount } from 'svelte';
-    import Experience from '$lib/Experience/Experience.js';
+	import '/src/style.css';
+	import { onMount } from 'svelte';
+	import Experience from '$lib/Experience/Experience.js';
 	import Loading from '../lib/Components/Loading.svelte';
-    import { loadingStore, sceneStore, transitionStore } from '$lib/store.js';
-    import UserInterface from '$lib/Components/UserInterface.svelte';
+	import { loadingStore, sceneStore, transitionStore } from '$lib/store.js';
+	import UserInterface from '$lib/Components/UserInterface.svelte';
 
-    let canvas;
+	let canvas;
 
-    onMount(() => {
-        
-        const experience = new Experience(canvas);
+	onMount(() => {
+		const experience = new Experience(canvas);
 
-        return () => {
-            experience.destroy();
-            // canvas.remove();
-        }
-    });
-    
+		return () => {
+			experience.destroy();
+			// canvas.remove();
+		};
+	});
 </script>
 
 <Loading progress={$loadingStore} />
-<UserInterface/>
+<UserInterface />
 <canvas bind:this={canvas}></canvas>
