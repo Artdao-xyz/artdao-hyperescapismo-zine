@@ -29,14 +29,15 @@ export default class Experience {
         this.debug = new Debug();
         this.sizes = new Sizes();
         this.time = new Time();
+
         this.scene = new THREE.Scene();
+        this.world = new World();
         this.camera = new Camera();
         this.renderer = new Renderer();
-        this.world = new World();
         
         // Events
         this.sizes.on('resize', () => this.resize());
-        this.time.on('animate', () => this.update());   
+        this.time.on('animate', () => this.update());
     }
 
     resize() {

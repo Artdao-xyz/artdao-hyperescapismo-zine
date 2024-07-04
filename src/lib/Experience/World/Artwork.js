@@ -23,11 +23,7 @@ export default class Artwork {
         this.height = this.texture.image.height;
         this.ratio = this.width / this.height;
 
-        this.font = this.resources.items.artworkFont;
-
-        // this.createScreen();
         this.createArtwork();
-        // this.createText();
     }
 
     setTexture() {
@@ -35,11 +31,8 @@ export default class Artwork {
         this.texture.colorSpace = THREE.SRGBColorSpace;
         // this.texture.minFilter = THREE.NearestFilter
         // this.texture.magFilter = THREE.NearestFilter
-        // this.texture.generateMipmaps = false
-        
+        // this.texture.generateMipmaps = false  
     }
-
-    createSeen() {}
 
     createArtwork() {
         this.setTexture();
@@ -64,42 +57,5 @@ export default class Artwork {
         this.artworkMesh.rotation.set(0, this.rotation.y, 0);
 
         this.experience.scene.add(this.artworkMesh);
-    }
-
-    createText() {
-
-        let textGeometry = new TextGeometry('Artwork name\nby Artist', {
-            font: this.font,
-            size: .05,
-            height: .01, // Adjust as needed
-        });
-
-        // textGeometry.computeBoundingBox();
-
-        let material = new THREE.MeshBasicMaterial({
-            side: THREE.DoubleSide,
-        });
-
-        let textMesh = new THREE.Mesh(textGeometry, material);
-        textMesh.position.set(this.position.x, this.position.y - 0.5, this.position.z);
-        this.experience.scene.add(textMesh);
-
-        // let backgroundGeometry = new THREE.PlaneGeometry(textGeometry.boundingBox.max.x * 2, textGeometry.boundingBox.max.y * 2);
-        // let backgroundMaterial = new THREE.MeshBasicMaterial({
-        //     color: 0xffffff, // White background color
-        //     side: THREE.DoubleSide,
-        // });
-        // let backgroundMesh = new THREE.Mesh(backgroundGeometry, backgroundMaterial);
-        // this.experience.scene.add(backgroundMesh);
-
-        // backgroundMesh.position.z = -0.1; // Move the background slightly behind the text
-    }
-
-    hide() {
-        this.artworkMesh.visible = false;
-    }
-
-    show() {
-        this.artworkMesh.visible = true;
     }
 }

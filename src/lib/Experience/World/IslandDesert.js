@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import gsap from 'gsap';
 import Experience from "../Experience";
 import Artwork from "./Artwork";
 import { sceneStore } from '$lib/store.js';
@@ -70,9 +71,7 @@ export default class IslandDesert {
         this.setModel();
         this.setTextures();
         this.setMaterial();
-
-        // this.float();
-        this.rotate();
+        this.updateMaterial()
     }
 
     setModel() {
@@ -128,74 +127,61 @@ export default class IslandDesert {
         });
     }
 
-    addArtworks() {
-        let artworkTexture1 = this.resources.items.artworkTexture1;
-        let artworkTexture2 = this.resources.items.artworkTexture2;
-        let artworkTexture3 = this.resources.items.artworkTexture3;
-        let artworkTexture4 = this.resources.items.artworkTexture4;
-        let artworkTexture5 = this.resources.items.artworkTexture5;
-
-        let artworkPosition1 = positions.islandDesert.artwork11.position;
-        let artworkPosition2 = positions.islandDesert.artwork12.position;
-        let artworkPosition3 = positions.islandDesert.artwork13.position;
-        let artworkPosition4 = positions.islandDesert.artwork14.position;
-        let artworkPosition5 = positions.islandDesert.artwork15.position;
-
-        let artworkRotation1 = positions.islandDesert.artwork11.rotation;
-        let artworkRotation2 = positions.islandDesert.artwork12.rotation;
-        let artworkRotation3 = positions.islandDesert.artwork13.rotation;
-        let artworkRotation4 = positions.islandDesert.artwork14.rotation;
-        let artworkRotation5 = positions.islandDesert.artwork15.rotation;
-
-        let artwork6 = new Artwork('artwork11', artworkTexture1, artworkPosition1, artworkRotation1);
-        let artwork7 = new Artwork('artwork12', artworkTexture2, artworkPosition2, artworkRotation2);
-        let artwork8 = new Artwork('artwork13', artworkTexture3, artworkPosition3, artworkRotation3);
-        let artwork9 = new Artwork('artwork14', artworkTexture4, artworkPosition4, artworkRotation4);
-        let artwork10 = new Artwork('artwork15', artworkTexture5, artworkPosition5, artworkRotation5);
-
-        this.artworks.push(artwork6.artworkMesh, artwork7.artworkMesh, artwork8.artworkMesh, artwork9.artworkMesh, artwork10.artworkMesh);
-
-        this.model.add(...this.artworks);
-
+    updateMaterial() {
         sceneStore.subscribe((value) => {
-            if (value != "island-desert") {
-                setTimeout(() => {
-                    // artwork6.hide();
-                    // artwork7.hide();
-                    // artwork8.hide();
-                    // artwork9.hide();
-                    // artwork10.hide();
-                }, 1000);
-            }
-            else {
-                setTimeout(() => {
-                    artwork6.show();
-                    artwork7.show();
-                    artwork8.show();
-                    artwork9.show();
-                    artwork10.show();
-                }, 1000);
+            if (value.includes('artwork')) {
+                gsap.to(this.material, {
+                    duration: 2,
+                    scalar: 0.1,
+                    ease: "power2.inOut",
+                    onUpdate: () => {
+                        this.material.color.setScalar(this.material.scalar);
+                        this.material.needsUpdate = true;
+                    }
+                });
+            } else {
+                gsap.to(this.material, {
+                    duration: 2,
+                    scalar: 1.0,
+                    ease: "power2.inOut",
+                    onUpdate: () => {
+                        this.material.color.setScalar(this.material.scalar); 
+                        this.material.needsUpdate = true;
+                    }
+                });
             }
         });
     }
 
-    float() {
-        this.time.on('animate', () => {
-            this.model.position.y = Math.sin(this.time.elapsed * 0.001) * 0.05;
-        });
-    }
-
-    rotate() {
-        
-        let lookAtVector = new THREE.Vector3(this.model.position.x, 0.50, this.model.position.z);
-
-        //loop through artworks and make them look at the camera
-        // for (let i = 0; i < this.artworks.length; i++) {
-        //     this.artworks[i].lookAt(lookAtVector);
-        // }
-
-        // this.time.on('animate', () => {
-        //     this.model.rotation.y += 0.001;
-        // });
+    addArtworks() {
+        // Destructure artwork textures and positions from this.resources.items and positions.islandFire respectively
+        const {
+            artworkTexture1,
+            artworkTexture2,
+            artworkTexture3,
+            artworkTexture4,
+            artworkTexture5
+        } = this.resources.items;
+    
+        const {
+            artwork11: { position: artworkPosition1, rotation: artworkRotation1 },
+            artwork12: { position: artworkPosition2, rotation: artworkRotation2 },
+            artwork13: { position: artworkPosition3, rotation: artworkRotation3 },
+            artwork14: { position: artworkPosition4, rotation: artworkRotation4 },
+            artwork15: { position: artworkPosition5, rotation: artworkRotation5 }
+        } = positions.islandDesert;
+    
+        // Instantiate Artwork instances
+        const artwork11 = new Artwork('artwork11', artworkTexture1, artworkPosition1, artworkRotation1);
+        const artwork12 = new Artwork('artwork12', artworkTexture2, artworkPosition2, artworkRotation2);
+        const artwork13 = new Artwork('artwork13', artworkTexture3, artworkPosition3, artworkRotation3);
+        const artwork14 = new Artwork('artwork14', artworkTexture4, artworkPosition4, artworkRotation4);
+        const artwork15 = new Artwork('artwork15', artworkTexture5, artworkPosition5, artworkRotation5);
+    
+        // Push artwork meshes to the array
+        this.artworks.push(artwork11.artworkMesh, artwork12.artworkMesh, artwork13.artworkMesh, artwork14.artworkMesh, artwork15.artworkMesh);
+    
+        // Add all artwork meshes to this.model
+        this.model.add(...this.artworks);
     }
 }

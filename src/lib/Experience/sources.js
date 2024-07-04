@@ -8,13 +8,13 @@ export default [
     {
         name: 'islandFireTexture',
         type: 'texture',
-        path: 'models/island-fire.jpg'
+        path: 'models/island-fire-color.jpg'
     },
-    // {
-    //     name: 'islandFireAlphaMap',
-    //     type: 'texture',
-    //     path: 'models/island-fire-alpha.jpg'
-    // },
+    {
+        name: 'islandFireAlphaMap',
+        type: 'texture',
+        path: 'models/island-fire-alpha.png'
+    },
     {
         name: 'islandIce',
         type: 'gltfModel',
@@ -23,12 +23,12 @@ export default [
     {
         name: 'islandIceTexture',
         type: 'texture',
-        path: 'models/island-ice.jpg'
+        path: 'models/island-ice-color.jpg'
     },
     {
         name: 'islandIceAlphaMap',
         type: 'texture',
-        path: 'models/island-ice-alpha.jpg'
+        path: 'models/island-ice-alpha.png'
     },
     {
         name: 'islandDesert',
@@ -38,12 +38,12 @@ export default [
     {
         name: 'islandDesertTexture',
         type: 'texture',
-        path: 'models/island-desert.jpg'
+        path: 'models/island-desert-color.jpg'
     },
     {
         name: 'islandDesertAlphaMap',
         type: 'texture',
-        path: 'models/island-desert-alpha.jpg'
+        path: 'models/island-desert-alpha.png'
     },
     {
         name: 'islandRuins',
@@ -53,12 +53,12 @@ export default [
     {
         name: 'islandRuinsTexture',
         type: 'texture',
-        path: 'models/island-ruins.jpg'
+        path: 'models/island-ruins-color.jpg'
     },
     {
         name: 'islandRuinsAlphaMap',
         type: 'texture',
-        path: 'models/island-ruins-alpha.jpg'
+        path: 'models/island-ruins-alpha.png'
     },
     //ARTWORKS
     {
@@ -97,11 +97,5 @@ export default [
         name: 'environmentMap',
         type: 'texture',
         path: 'textures/HDRI_Hyperescapismo.png'
-    },
-    // FONTS
-    {
-        name: 'artworkFont',
-        type: 'font',
-        path: 'fonts/Clash Display_Regular.json'
     },
 ]

@@ -128,7 +128,6 @@ export default class Raycaster {
     
                 if (intersects.length > 0) {
                     this.currentIntersect = intersects[0];
-    
                     // Define artwork ranges for each island
                     const artworkRanges = {
                         'island-fire': [1, 5],

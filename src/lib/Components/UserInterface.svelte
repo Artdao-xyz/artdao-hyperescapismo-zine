@@ -18,7 +18,7 @@
 <Logo/>
 
 <!-- CONNECT BUTTON -->
-<div in:fade={{ delay: 2000 , duration: 1000 }} class="absolute right-8 top-7 flex items-center">
+<div class="absolute right-0 top-0 md:right-8 md:top-7 flex items-center gap-2 h-full md:h-auto">
     <Toggle/>
     <ConnectWallet/>
 </div>
@@ -33,5 +33,4 @@
 <!-- ISLANDS INFO -->
 <IslandInfo/>
 
-  
-  
+

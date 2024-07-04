@@ -53,10 +53,10 @@ export default class Renderer {
 
         // this.instance.physicallyCorrectLights = true;
         // this.instance.outputColorSpace = THREE.SRGBColorSpace;
-        this.instance.toneMapping = THREE.ACESFilmicToneMapping;
-        this.instance.toneMappingExposure = 1.0;
-        this.instance.shadowMap.enabled = true;
-        this.instance.shadowMap.type = THREE.PCFSoftShadowMap;
+        // this.instance.toneMapping = THREE.ACESFilmicToneMapping;
+        // this.instance.toneMappingExposure = 1.0;
+        // this.instance.shadowMap.enabled = true;
+        // this.instance.shadowMap.type = THREE.PCFSoftShadowMap;
         this.instance.setClearColor('#FFFFFF');
         this.instance.setSize(this.sizes.width, this.sizes.height)
         this.instance.setPixelRatio(this.sizes.pixelRatio);
@@ -77,14 +77,16 @@ export default class Renderer {
         this.composer.addPass(vignettePass);
 
         sceneStore.subscribe((value) => {
-            if (value != "idle" && value != 'island-fire' && value != 'island-desert' && value != 'island-ice' && value != 'island-ruins') {
-                gsap.to(vignettePass.uniforms["offset"], { duration: 1, value: 0.0 });
-                gsap.to(vignettePass.uniforms["darkness"], {duration: 1, value: 0});
+            if (value.includes('artwork')) {
+                gsap.to(vignettePass.uniforms["offset"], { duration: 3, value: 0.0, ease: "power2.inOut" });
+                gsap.to(vignettePass.uniforms["darkness"], {duration: 3, value: 0, ease: "power2.inOut"});
             } else {
-                gsap.to(vignettePass.uniforms["offset"], { duration: 1, value: 1.5 });
-                gsap.to(vignettePass.uniforms["darkness"], {duration: 1, value: 0.8});
-
+                gsap.to(vignettePass.uniforms["offset"], { duration: 3, value: 1.5, ease: "power2.inOut" });
+                gsap.to(vignettePass.uniforms["darkness"], {duration: 3, value: 0.8, ease: "power2.inOut"});
+                
             }
+            // gsap.to(vignettePass.uniforms["offset"], { duration: 1, value: 1.5 });
+            // gsap.to(vignettePass.uniforms["darkness"], {duration: 1, value: 0.8});
         });
 
         const gammaCorrectionPass = new ShaderPass(GammaCorrectionShader)

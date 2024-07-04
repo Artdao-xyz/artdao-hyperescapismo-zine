@@ -72,24 +72,7 @@ export default class IslandFire {
         this.setModel();
         this.setTextures();
         this.setMaterial();
-
-        this.time.on('animate', () => { 
-            
-            // this.float(floating)
-            
-                // this.model.position.set(positions.islandFire.position.x, positions.islandFire.position.y, positions.islandFire.position.z);
-            // } 
-
-        });
-        // this.rotate();
-
-        sceneStore.subscribe((value) => {
-            if (value == "island-fire") {
-                floating = true;
-            } else {
-                floating = false;         
-            }
-        });
+        this.updateMaterial();
     }
 
     setModel() {
@@ -110,17 +93,24 @@ export default class IslandFire {
 
         this.resources.items.islandFireTexture.flipY = false;
         this.resources.items.islandFireTexture.colorSpace = THREE.SRGBColorSpace;
-        this.resources.items.islandFireTexture.minFilter = THREE.NearestFilter
-        this.resources.items.islandFireTexture.magFilter = THREE.NearestFilter
-        this.resources.items.islandFireTexture.generateMipmaps = false
+        // this.resources.items.islandFireTexture.minFilter = THREE.NearestFilter
+        // this.resources.items.islandFireTexture.magFilter = THREE.NearestFilter
+        // this.resources.items.islandFireTexture.generateMipmaps = false;
+
+        this.resources.items.islandFireAlphaMap.flipY = false;
         
         this.textures.color = this.resources.items.islandFireTexture;
+        this.textures.alphaMap = this.resources.items.islandFireAlphaMap;
     }
 
     setMaterial() {
         this.material = new THREE.MeshBasicMaterial({ 
-            map: this.textures.color,
-            side: THREE.DoubleSide });
+            map: this.textures.color, 
+            alphaMap: this.textures.alphaMap,
+            transparent: true, 
+            // alphaTest: 0.1, 
+            side: THREE.DoubleSide 
+        });
 
         //add texture to island
         this.model.traverse((child) => {
@@ -133,65 +123,61 @@ export default class IslandFire {
 
     updateMaterial() {
         sceneStore.subscribe((value) => {
-            if (value != "idle" && value != 'island-fire' && value != 'island-desert' && value != 'island-ice' && value != 'island-ruins') {
-                setTimeout(() => {
-                    this.material.color.setScalar(0.05);
-                }, 1000);
+            if (value.includes('artwork')) {
+                gsap.to(this.material, {
+                    duration: 2,
+                    scalar: 0.1,
+                    ease: "power2.inOut",
+                    onUpdate: () => {
+                        this.material.color.setScalar(this.material.scalar);
+                        this.material.needsUpdate = true;
+                    }
+                });
             } else {
-                this.material.color.setScalar(1.0);
+                gsap.to(this.material, {
+                    duration: 2,
+                    scalar: 1.0,
+                    ease: "power2.inOut",
+                    onUpdate: () => {
+                        this.material.color.setScalar(this.material.scalar); 
+                        this.material.needsUpdate = true;
+                    }
+                });
             }
         });
     }
 
     addArtworks() {
-        let artworkTexture1 = this.resources.items.artworkTexture1;
-        let artworkTexture2 = this.resources.items.artworkTexture2;
-        let artworkTexture3 = this.resources.items.artworkTexture3;
-        let artworkTexture4 = this.resources.items.artworkTexture4;
-        let artworkTexture5 = this.resources.items.artworkTexture5;
-
-        let artworkPosition1 = positions.islandFire.artwork1.position;
-        let artworkPosition2 = positions.islandFire.artwork2.position;
-        let artworkPosition3 = positions.islandFire.artwork3.position;
-        let artworkPosition4 = positions.islandFire.artwork4.position;
-        let artworkPosition5 = positions.islandFire.artwork5.position;
-
-        let artworkRotation1 = positions.islandFire.artwork1.rotation;
-        let artworkRotation2 = positions.islandFire.artwork2.rotation;
-        let artworkRotation3 = positions.islandFire.artwork3.rotation;
-        let artworkRotation4 = positions.islandFire.artwork4.rotation;
-        let artworkRotation5 = positions.islandFire.artwork5.rotation;
-
-        let artwork1 = new Artwork('artwork1', artworkTexture1, artworkPosition1, artworkRotation1);
-        let artwork2 = new Artwork('artwork2', artworkTexture2, artworkPosition2, artworkRotation2);
-        let artwork3 = new Artwork('artwork3', artworkTexture3, artworkPosition3, artworkRotation3);
-        let artwork4 = new Artwork('artwork4', artworkTexture4, artworkPosition4, artworkRotation4);
-        let artwork5 = new Artwork('artwork5', artworkTexture5, artworkPosition5, artworkRotation5);
-
+        // Destructure artwork textures and positions from this.resources.items and positions.islandFire respectively
+        const {
+            artworkTexture1,
+            artworkTexture2,
+            artworkTexture3,
+            artworkTexture4,
+            artworkTexture5
+        } = this.resources.items;
+    
+        const {
+            artwork1: { position: artworkPosition1, rotation: artworkRotation1 },
+            artwork2: { position: artworkPosition2, rotation: artworkRotation2 },
+            artwork3: { position: artworkPosition3, rotation: artworkRotation3 },
+            artwork4: { position: artworkPosition4, rotation: artworkRotation4 },
+            artwork5: { position: artworkPosition5, rotation: artworkRotation5 }
+        } = positions.islandFire;
+    
+        // Instantiate Artwork instances
+        const artwork1 = new Artwork('artwork1', artworkTexture1, artworkPosition1, artworkRotation1);
+        const artwork2 = new Artwork('artwork2', artworkTexture2, artworkPosition2, artworkRotation2);
+        const artwork3 = new Artwork('artwork3', artworkTexture3, artworkPosition3, artworkRotation3);
+        const artwork4 = new Artwork('artwork4', artworkTexture4, artworkPosition4, artworkRotation4);
+        const artwork5 = new Artwork('artwork5', artworkTexture5, artworkPosition5, artworkRotation5);
+    
+        // Push artwork meshes to the array
         this.artworks.push(artwork1.artworkMesh, artwork2.artworkMesh, artwork3.artworkMesh, artwork4.artworkMesh, artwork5.artworkMesh);
-
+    
+        // Add all artwork meshes to this.model
         this.model.add(...this.artworks);
     }
-
-    float(floating) {
-        if (floating) {
-            this.model.position.y = Math.sin(this.time.elapsed * 0.001) * 0.05;
-        } else {
-            this.model.position.set(positions.islandFire.position.x, positions.islandFire.position.y, positions.islandFire.position.z);
-        }
-    }
-
-    rotate() {
-        
-        let lookAtVector = new THREE.Vector3(this.model.position.x, 0.50, this.model.position.z);
-
-        //loop through artworks and make them look at the camera
-        // for (let i = 0; i < this.artworks.length; i++) {
-        //     this.artworks[i].lookAt(lookAtVector);
-        // }
-
-        // this.time.on('animate', () => {
-        //     this.model.rotation.y += 0.001;
-        // });
-    }
+    
+    
 }

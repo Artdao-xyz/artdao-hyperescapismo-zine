@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import gsap from 'gsap';
 import Experience from "../Experience";
 import Artwork from "./Artwork";
 import { sceneStore } from '$lib/store.js';
@@ -72,9 +73,8 @@ export default class IslandIce {
         this.setModel();
         this.setTextures();
         this.setMaterial();
+        this.updateMaterial();
         
-        // this.float();
-        this.rotate();
     }
 
     setModel() {
@@ -96,15 +96,15 @@ export default class IslandIce {
 
         this.resources.items.islandIceTexture.flipY = false;
         this.resources.items.islandIceTexture.colorSpace = THREE.SRGBColorSpace;
-        this.resources.items.islandIceTexture.minFilter = THREE.NearestFilter
-        this.resources.items.islandIceTexture.magFilter = THREE.NearestFilter
-        this.resources.items.islandIceTexture.generateMipmaps = false
+        // this.resources.items.islandIceTexture.minFilter = THREE.NearestFilter
+        // this.resources.items.islandIceTexture.magFilter = THREE.NearestFilter
+        // this.resources.items.islandIceTexture.generateMipmaps = false
 
         this.resources.items.islandIceAlphaMap.flipY = false;
-        this.resources.items.islandIceAlphaMap.colorSpace = THREE.SRGBColorSpace;
-        this.resources.items.islandIceAlphaMap.minFilter = THREE.NearestFilter
-        this.resources.items.islandIceAlphaMap.magFilter = THREE.NearestFilter
-        this.resources.items.islandIceAlphaMap.generateMipmaps = false
+        // this.resources.items.islandIceAlphaMap.colorSpace = THREE.SRGBColorSpace;
+        // this.resources.items.islandIceAlphaMap.minFilter = THREE.NearestFilter
+        // this.resources.items.islandIceAlphaMap.magFilter = THREE.NearestFilter
+        // this.resources.items.islandIceAlphaMap.generateMipmaps = false
 
         // this.resources.items.islandIceAlphaMap.wrapT = THREE.RepeatWrapping;
         // this.resources.items.islandIceAlphaMap.wrapS = THREE.RepeatWrapping;
@@ -131,75 +131,61 @@ export default class IslandIce {
         });
     }
 
-    addArtworks() {
-        let artworkTexture1 = this.resources.items.artworkTexture1;
-        let artworkTexture2 = this.resources.items.artworkTexture2;
-        let artworkTexture3 = this.resources.items.artworkTexture3;
-        let artworkTexture4 = this.resources.items.artworkTexture4;
-        let artworkTexture5 = this.resources.items.artworkTexture5;
-
-        let artworkPosition1 = positions.islandIce.artwork6.position;
-        let artworkPosition2 = positions.islandIce.artwork7.position;
-        let artworkPosition3 = positions.islandIce.artwork8.position;
-        let artworkPosition4 = positions.islandIce.artwork9.position;
-        let artworkPosition5 = positions.islandIce.artwork10.position;
-
-        let artworkRotation1 = positions.islandIce.artwork6.rotation;
-        let artworkRotation2 = positions.islandIce.artwork7.rotation;
-        let artworkRotation3 = positions.islandIce.artwork8.rotation;
-        let artworkRotation4 = positions.islandIce.artwork9.rotation;
-        let artworkRotation5 = positions.islandIce.artwork10.rotation;
-
-        let artwork11 = new Artwork('artwork6', artworkTexture1, artworkPosition1, artworkRotation1);
-        let artwork12 = new Artwork('artwork7', artworkTexture2, artworkPosition2, artworkRotation2);
-        let artwork13 = new Artwork('artwork8', artworkTexture3, artworkPosition3, artworkRotation3);
-        let artwork14 = new Artwork('artwork9', artworkTexture4, artworkPosition4, artworkRotation4);
-        let artwork15 = new Artwork('artwork10', artworkTexture5, artworkPosition5, artworkRotation5);
-
-        this.artworks.push(artwork11.artworkMesh, artwork12.artworkMesh, artwork13.artworkMesh, artwork14.artworkMesh, artwork15.artworkMesh);
-
-        this.model.add(...this.artworks);
-
+    updateMaterial() {
         sceneStore.subscribe((value) => {
-            if (value != "island-ice") {
-                setTimeout(() => {
-                    // artwork11.hide();
-                    // artwork12.hide();
-                    // artwork13.hide();
-                    // artwork14.hide();
-                    // artwork15.hide();
-                }, 1000);
-            }
-            else {
-                setTimeout(() => {
-                    artwork11.show();
-                    artwork12.show();
-                    artwork13.show();
-                    artwork14.show();
-                    artwork15.show();
-                }, 1000);
+            if (value.includes('artwork')) {
+                gsap.to(this.material, {
+                    duration: 2,
+                    scalar: 0.1,
+                    ease: "power2.inOut",
+                    onUpdate: () => {
+                        this.material.color.setScalar(this.material.scalar);
+                        this.material.needsUpdate = true;
+                    }
+                });
+            } else {
+                gsap.to(this.material, {
+                    duration: 2,
+                    scalar: 1.0,
+                    ease: "power2.inOut",
+                    onUpdate: () => {
+                        this.material.color.setScalar(this.material.scalar); 
+                        this.material.needsUpdate = true;
+                    }
+                });
             }
         });
     }
 
-    float() {
-        this.time.on('animate', () => {
-            this.model.position.y = Math.sin(this.time.elapsed * 0.001) * 0.05;
-        });
+    addArtworks() {
+        // Destructure artwork textures and positions from this.resources.items and positions.islandFire respectively
+        const {
+            artworkTexture1,
+            artworkTexture2,
+            artworkTexture3,
+            artworkTexture4,
+            artworkTexture5
+        } = this.resources.items;
+    
+        const {
+            artwork6: { position: artworkPosition1, rotation: artworkRotation1 },
+            artwork7: { position: artworkPosition2, rotation: artworkRotation2 },
+            artwork8: { position: artworkPosition3, rotation: artworkRotation3 },
+            artwork9: { position: artworkPosition4, rotation: artworkRotation4 },
+            artwork10: { position: artworkPosition5, rotation: artworkRotation5 }
+        } = positions.islandIce;
+    
+        // Instantiate Artwork instances
+        const artwork6 = new Artwork('artwork6', artworkTexture1, artworkPosition1, artworkRotation1);
+        const artwork7 = new Artwork('artwork7', artworkTexture2, artworkPosition2, artworkRotation2);
+        const artwork8 = new Artwork('artwork8', artworkTexture3, artworkPosition3, artworkRotation3);
+        const artwork9 = new Artwork('artwork9', artworkTexture4, artworkPosition4, artworkRotation4);
+        const artwork10 = new Artwork('artwork10', artworkTexture5, artworkPosition5, artworkRotation5);
+    
+        // Push artwork meshes to the array
+        this.artworks.push(artwork6.artworkMesh, artwork7.artworkMesh, artwork8.artworkMesh, artwork9.artworkMesh, artwork10.artworkMesh);
+    
+        // Add all artwork meshes to this.model
+        this.model.add(...this.artworks);
     }
-
-    rotate() {
-        
-        let lookAtVector = new THREE.Vector3(this.model.position.x, 0.50, this.model.position.z);
-
-        //loop through artworks and make them look at the camera
-        // for (let i = 0; i < this.artworks.length; i++) {
-        //     this.artworks[i].lookAt(lookAtVector);
-        // }
-
-        // this.time.on('animate', () => {
-        //     this.model.rotation.y += 0.001;
-        // });
-    }
-
 }
