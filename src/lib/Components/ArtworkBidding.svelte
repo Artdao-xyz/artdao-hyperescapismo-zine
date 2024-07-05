@@ -87,7 +87,7 @@
 		</div>
 	</div> -->
 	
-	<div class="flex select-none cursor-default absolute right-1/2 translate-x-1/2 md:-translate-x-0 md:right-4 bottom-16 md:bottom-4 w-full md:w-auto font-monda text-white capitalize tracking-wide px-7 md:px-0">
+	<div in:fade={{ delay: 2000, duration: 1000 }} class="flex select-none cursor-default absolute right-1/2 translate-x-1/2 md:-translate-x-0 md:right-4 bottom-16 md:bottom-4 w-full md:w-auto font-monda text-white capitalize tracking-wide px-7 md:px-0">
 		
 		<img draggable="false" class="hidden md:block" src="/artwork-info.png" alt="artwork bidding" />
 		<img draggable="false" class="md:hidden w-full" src="/bidding-info-mobile.png" alt="artwork bidding"/>
