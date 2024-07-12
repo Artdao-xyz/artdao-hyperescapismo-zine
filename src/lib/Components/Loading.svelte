@@ -1,4 +1,6 @@
 <script>
+	import { sceneStore } from '$lib/store.js';
+
 	export let progress;
 
 	let progressBar;
@@ -16,6 +18,7 @@
 				// console.log('ready')
 				setTimeout(() => {
 					progressBarContainer.style.display = 'none';
+					sceneStore.set('idle')
 				}, 1000);
 			}
 		}

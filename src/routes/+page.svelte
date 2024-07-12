@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 	import Experience from '$lib/Experience/Experience.js';
 	import Loading from '../lib/Components/Loading.svelte';
-	import { loadingStore, sceneStore, transitionStore } from '$lib/store.js';
+	import { loadingStore } from '$lib/store.js';
 	import UserInterface from '$lib/Components/UserInterface.svelte';
 
 	let canvas;
@@ -13,7 +13,7 @@
 
 		return () => {
 			experience.destroy();
-			// canvas.remove();
+			canvas.remove();
 		};
 	});
 </script>

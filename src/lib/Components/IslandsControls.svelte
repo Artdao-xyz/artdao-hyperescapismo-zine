@@ -5,7 +5,6 @@
 
 	const scenes = ['island-desert', 'island-ice', 'island-ruins', 'island-fire'];
 	let lastValidScene = '';
-	let isMobile = false;
 
 	const setScene = (scene) => {
 		sceneStore.set(scene);
@@ -35,16 +34,6 @@
 			lastValidScene = getSceneFromArtwork($sceneStore);
 		}
 	}
-
-	// Check for mobile browser after the component mounts
-	onMount(() => {
-		isMobile = isMobileBrowser();
-	});
-
-	// Function to check if the browser is mobile
-	const isMobileBrowser = () => {
-		return /Mobi|Android/i.test(navigator.userAgent);
-	};
 </script>
 
 <div

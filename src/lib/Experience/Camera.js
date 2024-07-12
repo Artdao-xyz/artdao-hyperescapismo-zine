@@ -15,7 +15,10 @@ export default class Camera {
 		this.scene = this.experience.scene;
 		this.canvas = this.experience.canvas;
 		this.debug = this.experience.debug;
+		this.time = this.experience.time;
 		this.unsubscribe = null;
+
+		console.log(this.experience)
 
 		this.currentArtworkIndex = null; // Track the current animated artwork index
 		let experienceLoaded = false;
@@ -26,10 +29,11 @@ export default class Camera {
 
 		this.setInstance();
 		this.setOrbitControls();
-		this.cameraUpdate('idle');
+		// this.cameraUpdate('idle');
 
 		this.unsubscribe = sceneStore.subscribe((value) => {
 			if (experienceLoaded) {
+				console.log(value)
 				this.cameraUpdate(value);
 			}
 		});
@@ -76,6 +80,8 @@ export default class Camera {
 		});
 	}
 
+
+
 	setInstance() {
 		const isMobile = window.innerWidth < 768;
 		const fov = isMobile ? 50 : 30;
@@ -87,7 +93,8 @@ export default class Camera {
 			200
 		);
 
-		// this.instance.position.set(0, 0, 30);
+
+		// this.instance.position.set(0, 0, 0);
 		this.scene.add(this.instance);
 	}
 
@@ -102,8 +109,10 @@ export default class Camera {
 	}
 
 	cameraUpdate(value) {
+
 		if (!value.includes('artwork')) {
 			if (value == 'idle') {
+				this.isFloating = true
 				this.newlookAt = new THREE.Vector3(0, 0.0, 0);
 				gsap.to(this.controls.target, {
 					duration: 1,
@@ -129,9 +138,11 @@ export default class Camera {
 						ease: 'power2.inOut'
 					});
 				}
+				this.floatingCamera()
 				this.controls.enabled = false;
 			}
 			if (value == 'island-ice') {
+				this.isFloating = false;
 				this.resetPreviousArtworkPosition('islandFire');
 				this.newlookAt = this.experience.world.islandIce.model.position;
 				gsap.to(this.controls.target, {
@@ -152,6 +163,7 @@ export default class Camera {
 			}
 
 			if (value == 'island-desert') {
+				this.isFloating = false;
 				this.resetPreviousArtworkPosition('islandFire');
 				this.newlookAt = this.experience.world.islandDesert.model.position;
 				gsap.to(this.controls.target, {
@@ -172,6 +184,7 @@ export default class Camera {
 			}
 
 			if (value == 'island-fire') {
+				this.isFloating = false;
 				this.resetPreviousArtworkPosition('islandFire');
 				this.newlookAt = this.experience.world.islandFire.model.position;
 				gsap.to(this.controls.target, {
@@ -192,6 +205,7 @@ export default class Camera {
 			}
 
 			if (value == 'island-ruins') {
+				this.isFloating = false;
 				this.newlookAt = this.experience.world.islandRuins.model.position;
 				gsap.to(this.controls.target, {
 					duration: 2,
@@ -213,6 +227,7 @@ export default class Camera {
 			gsap.to(this.controls, { duration: 3, minPolarAngle: Math.PI / 3.0, ease: 'power2.inOut' });
 			gsap.to(this.controls, { duration: 3, maxPolarAngle: Math.PI / 2.25, ease: 'power2.inOut' });
 		} else {
+			this.isFloating = false;
 			gsap.to(this.controls, { duration: 3, minPolarAngle: 0, ease: 'power2.inOut' });
 			gsap.to(this.controls, { duration: 3, maxPolarAngle: Math.PI, ease: 'power2.inOut' });
 
@@ -467,6 +482,30 @@ export default class Camera {
 		this.raycaster = new Raycaster(scenes, this.instance);
 	}
 
+	floatingCamera() {
+		const elapsedTime = this.time.elapsed;
+		// const amplitude = 0.1; // Adjust the amplitude for the desired floating range
+		// const frequency = 50.2; // Adjust the frequency for the desired speed
+	
+		// this.instance.position.y += Math.sin(elapsedTime * Math.PI) * 1.1;
+		// this.instance.position.x += Math.cos(elapsedTime * Math.PI) * 1.1;
+		// this.instance.position.z += Math.sin(elapsedTime * Math.PI) * 1.1;
+
+		const amplitude = 0.001; // Adjust the amplitude for the desired floating range
+		const frequency = 1500; // Adjust the frequency for the desired speed
+	
+		// Calculate the new Y position
+		this.instance.position.x = this.instance.position.x + Math.sin(elapsedTime / frequency) * amplitude;
+		this.instance.position.y = this.instance.position.y + Math.cos(elapsedTime / frequency) * amplitude;
+		this.instance.position.z = this.instance.position.z + Math.cos(elapsedTime / frequency) * amplitude;
+	
+	
+		// Optionally, you can also apply a slight rotation
+		// this.instance.rotation.x += Math.sin(elapsedTime * frequency * 1.2) * amplitude * 0.01;
+		// this.instance.rotation.y += Math.sin(elapsedTime * frequency * 1.3) * amplitude * 0.01;
+		// this.instance.rotation.z += Math.sin(elapsedTime * frequency * 1.4) * amplitude * 0.01;
+	}
+
 	resize() {
 		this.instance.aspect = this.sizes.width / this.sizes.height;
 		this.instance.updateProjectionMatrix();
@@ -475,6 +514,11 @@ export default class Camera {
 	update() {
 		if (this.controls) {
 			this.controls.update();
+
+			if (this.isFloating) {
+
+				this.floatingCamera()
+			}
 		}
 	}
 
