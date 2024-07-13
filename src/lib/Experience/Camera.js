@@ -491,7 +491,7 @@ export default class Camera {
 		// this.instance.position.x += Math.cos(elapsedTime * Math.PI) * 1.1;
 		// this.instance.position.z += Math.sin(elapsedTime * Math.PI) * 1.1;
 
-		const amplitude = 0.001; // Adjust the amplitude for the desired floating range
+		const amplitude = 0.005; // Adjust the amplitude for the desired floating range
 		const frequency = 1500; // Adjust the frequency for the desired speed
 	
 		// Calculate the new Y position
