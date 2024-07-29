@@ -127,7 +127,7 @@ export default class Environment {
 	}
 
 	islandFog() {
-		gsap.to(this.fog.instance, { duration: 3, far: 8.0, ease: 'power2.inOut' });
+		gsap.to(this.fog.instance, { duration: 3, far: 10.0, ease: 'power2.inOut' });
 		gsap.to(this.fog.instance, { duration: 3, near: 0.0, ease: 'power2.inOut' });
 		gsap.to(this.scene, { duration: 1, backgroundIntensity: 0.65 });
 

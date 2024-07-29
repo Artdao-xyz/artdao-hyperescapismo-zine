@@ -18,8 +18,6 @@ export default class Camera {
 		this.time = this.experience.time;
 		this.unsubscribe = null;
 
-		console.log(this.experience)
-
 		this.currentArtworkIndex = null; // Track the current animated artwork index
 		let experienceLoaded = false;
 
@@ -33,7 +31,6 @@ export default class Camera {
 
 		this.unsubscribe = sceneStore.subscribe((value) => {
 			if (experienceLoaded) {
-				console.log(value)
 				this.cameraUpdate(value);
 			}
 		});
@@ -155,7 +152,7 @@ export default class Camera {
 				gsap.to(this.instance.position, {
 					duration: 3,
 					x: 0.93,
-					y: 0.95,
+					y: 0.45,
 					z: -1.1,
 					ease: 'power2.inOut'
 				});
@@ -176,8 +173,8 @@ export default class Camera {
 				gsap.to(this.instance.position, {
 					duration: 3,
 					x: 1.75,
-					y: 1.25,
-					z: -0.7,
+					y: 0.6,
+					z: -0.4,
 					ease: 'power2.inOut'
 				});
 				this.controls.enabled = true;
@@ -196,9 +193,9 @@ export default class Camera {
 				});
 				gsap.to(this.instance.position, {
 					duration: 3,
-					x: -0.12,
-					y: 1.22,
-					z: 0.37,
+					x: -0.05,
+					y: 0.76,
+					z: 0.31,
 					ease: 'power2.inOut'
 				});
 				this.controls.enabled = true;
@@ -206,6 +203,7 @@ export default class Camera {
 
 			if (value == 'island-ruins') {
 				this.isFloating = false;
+				this.resetPreviousArtworkPosition('islandFire');
 				this.newlookAt = this.experience.world.islandRuins.model.position;
 				gsap.to(this.controls.target, {
 					duration: 2,
@@ -216,9 +214,9 @@ export default class Camera {
 				});
 				gsap.to(this.instance.position, {
 					duration: 3,
-					x: -1,
-					y: 1.22,
-					z: -1.2,
+					x: -1.1,
+					y: 0.52,
+					z: -0.92,
 					ease: 'power2.inOut'
 				});
 				this.controls.enabled = true;
@@ -464,7 +462,6 @@ export default class Camera {
 		});
 
 		if (this.instance.aspect < 1) {
-			console.log(artworks, artworkIndex);
 			gsap.to(artworks[artworkIndex % 5].position, {
 				duration: 2,
 				y: artworks[artworkIndex % 5].position.y + 0.15,

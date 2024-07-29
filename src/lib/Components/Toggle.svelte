@@ -9,10 +9,10 @@
 		type="checkbox"
 		on:click|stopPropagation
 		bind:checked={isChecked}
-		class="absolute left-0 w-full h-full peer appearance-none rounded-md cursor-pointer"
+		class="absolute left-0 w-full h-full peer appearance-none rounded-md cursor-pointer "
 	/>
 	<span
-		class="w-16 h-9 flex items-center flex-shrink-0 p-1 bg-transparent rounded-full duration-400 ease-in-out after:w-7 after:h-7 peer-checked:bg-white peer-checked:bg-opacity-25 after:bg-white after:rounded-full after:duration-200 peer-checked:after:translate-x-6 border-2 border-white peer/switch shadow-white shadow-cloud"
+		class="w-16 h-9 flex items-center flex-shrink-0 p-1 bg-transparent rounded-full duration-400 ease-in-out after:w-7 after:h-7 peer-checked:bg-white peer-checked:bg-opacity-25 after:bg-white after:rounded-full after:duration-200 peer-checked:after:translate-x-6 border border-white peer/switch shadow-cloud"
 	></span>
 
 	<div

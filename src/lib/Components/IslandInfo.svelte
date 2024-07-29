@@ -8,22 +8,22 @@
 	const scenes = [
 		{
 			id: 'island-fire',
-			text: 'From ashes to dust, a new renaissance emerges, where the relentless flames transform and fortify, forging rare gems and stones — a completely renewed self forged by fire.',
+			text: 'From ashes to dust, emerges a new rebirth where relentless flames transform and fortify, forging rare gems and stones.',
 			artwork: 'artwork1'
 		},
 		{
 			id: 'island-ruins',
-			text: 'In the ruins of the past, echoes of forgotten glory and wisdom resound, teaching us the lessons of history.',
+			text: 'In the deep heart of the forest, tranquility reigns, whispering ancestral secrets that blossom into inner creativity.',
 			artwork: 'artwork16'
 		},
 		{
 			id: 'island-ice',
-			text: 'The icy winds whisper secrets of endurance and strength, carving beauty into the frozen landscape.',
+			text: 'In the solitude of glaciers, coldness rises as a monument to introspection and isolation, capturing the pristine and fragile beauty of frozen landscapes.',
 			artwork: 'artwork6'
 		},
 		{
 			id: 'island-desert',
-			text: 'Amidst the vast desert sands, the quest for survival reveals the true essence of resilience and hope.',
+			text: 'In the vast emptiness of the desert, where sand dances in the wind — a storm of creativity and existentialism shapes new forms and ideas from the ever-shifting sands.',
 			artwork: 'artwork11'
 		}
 	];
@@ -43,28 +43,28 @@
 	{#if $sceneStore === scene.id}
 		<div
 			in:fade={{ delay: 2000, duration: 1000 }}
-			class="absolute w-full md:w-auto px-4 md:px-0 bottom-16 md:bottom-4 left-1/2 -translate-x-1/2"
+			class="absolute w-full px-4 md:px-0 bottom-16 md:bottom-4 left-1/2 -translate-x-1/2"
 		>
 			<img
 				draggable="false"
-				class="hidden md:block select-none relative"
+				class="hidden mx-auto sm:block select-none relative"
 				src="/island-info.png"
 				alt="island info"
 			/>
 			<img
 				draggable="false"
-				class="md:hidden select-none relative w-full"
+				class="sm:hidden select-none relative w-full"
 				src="/island-info-mobile.png"
 				alt="island info"
 			/>
 			<img
 				draggable="false"
-				class="select-none absolute -top-5 left-1/2 -translate-x-1/2"
+				class="select-none absolute -top-2 left-1/2 -translate-x-1/2"
 				src={`${scene.id}-icon.png`}
 				alt="{scene.id} icon"
 			/>
 			<div
-				class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full space-y-3 md:space-y-5 px-8 py-4 md:p-4 text-center"
+				class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-2/3 lg:w-1/2 xl:w-1/3 space-y-4 py-4 md:py-0 text-center"
 			>
 				<p
 					class="text-center text-white text-xs md:text-sm font-monda font-light leading-tight tracking-wide"

@@ -20,7 +20,7 @@
 		</button>
 	{:else}
 		<button
-			class="relative font-monda bg-white bg-opacity-10 rounded-full px-3 py-1 uppercase text-white text-sm md:text-lg shadow-md border-[3px] border-transparent hover:border-white transition-all duration-200 ease-in-out box-border h-10"
+			class="relative font-monda bg-white bg-opacity-10 rounded-full py-1.5 px-6 uppercase text-white text-sm md:text-base shadow-md border-[3px] border-transparent hover:border-white transition-all duration-200 ease-in-out box-border h-10 tracking-wide"
 			on:click|stopPropagation={toggleConnection}
 		>
 			connect

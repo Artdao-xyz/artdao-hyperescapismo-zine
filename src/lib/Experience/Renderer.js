@@ -80,7 +80,7 @@ export default class Renderer {
 				gsap.to(vignettePass.uniforms['offset'], { duration: 3, value: 0.0, ease: 'power2.inOut' });
 				gsap.to(vignettePass.uniforms['darkness'], { duration: 3, value: 0, ease: 'power2.inOut' });
 			} else {
-				gsap.to(vignettePass.uniforms['offset'], { duration: 3, value: 1.5, ease: 'power2.inOut' });
+				gsap.to(vignettePass.uniforms['offset'], { duration: 3, value: 1.25, ease: 'power2.inOut' });
 				gsap.to(vignettePass.uniforms['darkness'], {
 					duration: 3,
 					value: 0.8,

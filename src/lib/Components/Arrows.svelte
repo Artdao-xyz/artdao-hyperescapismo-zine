@@ -57,7 +57,7 @@
 {#if $sceneStore.startsWith('artwork')}
 	<div
 		in:fade={{ delay: 2000, duration: 1000 }}
-		class="absolute w-full bottom-72 md:top-1/2 px-16 md:px-4 flex justify-between items-center z-10"
+		class="absolute w-full top-1/2 translate-y-20 md:-translate-y-1/2 px-16 md:px-4 flex justify-between items-center z-10"
 	>
 		<button on:click|stopPropagation={moveLeft}
 			><img

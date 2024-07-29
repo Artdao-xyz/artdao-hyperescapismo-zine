@@ -36,9 +36,9 @@
 	<div
 		in:fade={{ delay: 2000, duration: 1000 }}
 		on:click|stopPropagation
-		class="select-none cursor-default absolute left-1/2 -translate-x-1/2 md:left-4 md:-translate-x-0 bottom-32 md:bottom-4 space-y-3 md:space-y-2 w-full md:w-auto px-7 md:px-0"
+		class="select-none cursor-default md:absolute md:left-4 md:-translate-x-0 md:bottom-4 space-y-2 w-full md:w-auto px-4 md:px-0"
 	>
-		<div class="relative flex items-center justify-between">
+		<div class="relative flex items-center justify-between gap-1 md:gap-0">
 			<button
 				on:click={() => (isArtworkSelected = true)}
 				class="relative"
@@ -46,7 +46,7 @@
 			>
 				<img draggable="false" src="/artwork-label.png" alt="artwork label" />
 				<span
-					class=" absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-sm font-semibold font-garamond uppercase tracking-wide"
+					class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-sm font-semibold font-garamond uppercase tracking-wide"
 					>artwork</span
 				>
 			</button>
@@ -63,7 +63,7 @@
 			</button>
 			<img
 				draggable="false"
-				class="absolute left-1/2 -translate-x-1/2 -bottom-5 md:-bottom-4"
+				class="absolute left-1/2 -translate-x-1/2 -bottom-2.5"
 				src={`${lastValidScene}-icon.png`}
 				alt="scene icon"
 			/>
@@ -99,7 +99,7 @@
 					>
 						Artist Name
 					</h1>
-					<p class="text-white text-xs font-monda tracking-tight font">
+					<p class="text-white text-xs font-monda tracking-tight px-2">
 						The Island of Fire offers an escape through intensity and passion.
 					</p>
 				</div>

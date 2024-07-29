@@ -87,48 +87,39 @@
 		</div>
 	</div> -->
 	
-	<div in:fade={{ delay: 2000, duration: 1000 }} class="flex select-none cursor-default absolute right-1/2 translate-x-1/2 md:-translate-x-0 md:right-4 bottom-16 md:bottom-4 w-full md:w-auto font-monda text-white capitalize tracking-wide px-7 md:px-0">
+	<div in:fade={{ delay: 2000, duration: 1000 }} class="flex select-none cursor-default relative md:absolute md:-translate-x-0 md:right-4 md:bottom-4 w-full md:w-auto font-monda text-white capitalize tracking-wide px-4 md:px-0">
 		
 		<img draggable="false" class="hidden md:block" src="/artwork-info.png" alt="artwork bidding" />
 		<img draggable="false" class="md:hidden w-full" src="/bidding-info-mobile.png" alt="artwork bidding"/>
 
-		<div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex w-full p-8 gap-4">
-			<div class="relative flex md:flex-col gap-1 md:gap-3 w-full md:w-1/2">
+		<div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full p-8 flex md:flex-col items-center gap-6">
+			<div class="flex gap-4 h-full">
+				<div class="relative flex md:flex-col justify-between gap-2 w-full md:w-1/2">
 
-				<span class="hidden md:block text-[10px]">your offer</span>
-
-
-				<div class="flex flex-col gap-1">
+					<span class="hidden md:block text-xs">your offer</span>
 					<div class="relative">
-						<input class="md:text-xl bg-black bg-opacity-75 p-2 w-full outline-none border-2 border-transparent focus:border-white" placeholder="1.0" type="number">
+						<input class="md:text-xl bg-white bg-opacity-5 px-1 w-full outline-none border-2 border-transparent focus:border-white" placeholder="1.0" type="number">
 						<span class="uppercase opacity-50 absolute right-2 top-1/2 -translate-y-1/2">eth</span>
-					  </div>
-					  
-					<div class="hidden md:flex opacity-50 items-center justify-between text-[10px]"><span class="">$3154</span><span class="">min bid: 0.10 ETH</span></div>
+					</div>
+						
+					<div class="hidden md:flex opacity-50 items-center justify-between text-xs"><span class="">$3154</span><span class="">min bid: 0.10 ETH</span></div>
 				</div>
 
-				<button class="text-xs md:text-sm uppercase rounded-full border-2 border-white self-center px-3.5 md:px-5 py-2.5 bg-white bg-opacity-10 leading-none hover:bg-opacity-20 whitespace-nowrap">make offer</button>
-			</div>
-
-			<div class="relative w-1/2 hidden md:block space-y-4">
-				
-				<div class="space-y-1">
+				<div class="relative hidden md:flex flex-col justify-between text-xs text-nowrap">
 					<div class="flex items-center gap-2">
-						<img class="h-full" src="/offer.png" alt="offer">
-						<span class="text-[10px] text-slate-300">open auction</span>
+						<img src="/offer.png" alt="offer">
+						<span class="text-slate-300">open auction</span>
 					</div>
-					<div class="text-[10px] text-slate-300">
+					<span class="text-slate-300">
 						2d 23h 12m
-					</div>
-				</div>
-				<div class="space-y-2">
-				{#each bids as bid}
-					<div class="text-[10px] leading-none">
-						{bid.amount} bid by {bid.bidder}
-					</div>
-				{/each}
+					</span>
+					<span class="hidden md:block leading-none">
+						{bids[0].amount} bid by {bids[0].bidder}
+					</span>
 				</div>
 			</div>
+			<button class="text-xs md:text-sm uppercase md:rounded-full border-2 border-white self-center px-3.5 md:px-5 py-1.5 md:py-2.5 bg-white bg-opacity-10 leading-none hover:bg-opacity-20 whitespace-nowrap w-1/3 md:w-full">make offer</button>
+
 		</div>
 	</div>
 {/if}

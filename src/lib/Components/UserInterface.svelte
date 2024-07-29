@@ -27,8 +27,10 @@
 <Arrows />
 
 <!-- ARTWORKS INFO -->
-<ArtworkInfo />
-<ArtworkBidding />
+ <div class="absolute left-0 bottom-0 w-full h-fit space-y-2.5">
+	<ArtworkInfo />
+	<ArtworkBidding />
+</div>
 
 <!-- ISLANDS INFO -->
 <IslandInfo />

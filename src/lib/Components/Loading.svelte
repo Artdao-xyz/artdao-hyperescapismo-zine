@@ -10,12 +10,7 @@
 	$: {
 		if (progressBar) {
 			progressBar.value = progress;
-
-			// console.log(progress)
-			// if (progress == 100) {
 			if (progress == 100 && enter) {
-				//make a delay of two seconds to show the progress bar at 100%
-				// console.log('ready')
 				setTimeout(() => {
 					progressBarContainer.style.display = 'none';
 					sceneStore.set('idle')
@@ -35,12 +30,12 @@
 	style="background-image: url('/bg-lore.png');"
 >
 	<div class="relative w-fit h-screen flex flex-col justify-center items-center">
-		<img class="scale-150 md:scale-100 max-w-full h-auto max-h-full" src="/lore.png" alt="Lore" />
+		<img class="scale-150 sm:scale-100 max-w-full h-auto max-h-full py-6" src="/lore.png" alt="Lore" />
 		<div
-			class="absolute inset-0 flex flex-col justify-center items-center px-12 md:px-24 xl:px-28 gap-6 md:gap-4"
+			class="absolute inset-0 flex flex-col justify-center items-center px-12 sm:px-24 gap-6 sm:gap-4"
 		>
 			<img src="/logo-hyperescapismo.svg" alt="Hyperescapismo" />
-			<p class="text-center text-sm xl:text-base">
+			<p class="text-center text-sm">
 				O ArtDAO tem trabalhado nos últimos meses em nossa própria infraestrutura de mercado na
 				plataforma Fuel, uma nova Layer-2 que se expande a partir do Ethereum. Acreditamos que isso
 				oferece uma nova e poderosa oportunidade para ampliar as possibilidades da arte digital no
