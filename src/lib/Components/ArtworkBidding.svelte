@@ -92,7 +92,7 @@
 		<img draggable="false" class="hidden md:block" src="/artwork-info.png" alt="artwork bidding" />
 		<img draggable="false" class="md:hidden w-full" src="/bidding-info-mobile.png" alt="artwork bidding"/>
 
-		<div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full p-8 flex md:flex-col items-center gap-6">
+		<div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full p-8 flex justify-between md:flex-col items-center gap-6">
 			<div class="flex gap-4 h-full">
 				<div class="relative flex md:flex-col justify-between gap-2 w-full md:w-1/2">
 

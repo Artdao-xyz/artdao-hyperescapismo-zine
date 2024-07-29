@@ -1,6 +1,8 @@
 <script>
 	import { fade } from 'svelte/transition';
+	import { sceneStore } from '$lib/store.js';
 
+	import Inactivity from './Inactivity.svelte';
 	import Toggle from '$lib/Components/Toggle.svelte';
 	import ConnectWallet from '$lib/Components/ConnectWallet.svelte';
 	import ArtworkInfo from '$lib/Components/ArtworkInfo.svelte';
@@ -27,10 +29,20 @@
 <Arrows />
 
 <!-- ARTWORKS INFO -->
- <div class="absolute left-0 bottom-0 w-full h-fit space-y-2.5">
+ <div class="absolute left-0 bottom-16 w-full h-fit space-y-2.5">
 	<ArtworkInfo />
 	<ArtworkBidding />
 </div>
 
 <!-- ISLANDS INFO -->
 <IslandInfo />
+
+{#if $sceneStore.includes('island')}
+	<Inactivity>
+		Drag screen to navigate around the Island.
+	</Inactivity>
+{:else if $sceneStore.includes('idle')}
+	<Inactivity>
+		Click an Island to explore.
+	</Inactivity>
+{/if}

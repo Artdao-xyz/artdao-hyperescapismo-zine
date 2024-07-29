@@ -53,7 +53,7 @@
 			/>
 			<img
 				draggable="false"
-				class="sm:hidden select-none relative w-full"
+				class="sm:hidden select-none relative mx-auto"
 				src="/island-info-mobile.png"
 				alt="island info"
 			/>
@@ -64,7 +64,7 @@
 				alt="{scene.id} icon"
 			/>
 			<div
-				class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-2/3 lg:w-1/2 xl:w-1/3 space-y-4 py-4 md:py-0 text-center"
+				class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-2/3 lg:w-1/2 xl:w-1/3 space-y-4 px-8 md:px-8 py-4 md:py-0 text-center"
 			>
 				<p
 					class="text-center text-white text-xs md:text-sm font-monda font-light leading-tight tracking-wide"
@@ -82,14 +82,5 @@
 				</div>
 			</div>
 		</div>
-		<!-- DRAG -->
-		{#if showDragScreen}
-			<div
-				in:fade={{ delay: 2000, duration: 1000 }}
-				class="select-none absolute left-1/2 -translate-x-1/2 top-1/2 text-white text-sm font-monda tracking-wide text-nowrap drop-shadow-cloud"
-			>
-				drag screen to Navigate around the island
-			</div>
-		{/if}
 	{/if}
 {/each}

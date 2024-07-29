@@ -73,13 +73,13 @@
 			<img draggable="false" class="hidden md:block" src="/artwork-info.png" alt="artwork info" />
 			<img
 				draggable="false"
-				class="md:hidden w-full"
+				class="md:hidden h-fit w-full"
 				src="/artwork-info-mobile.png"
 				alt="artwork info"
 			/>
 			{#if isArtworkSelected}
 				<div
-					class="absolute left-4 md:left-12 top-1/2 -translate-y-1/2 flex md:flex-col md:gap-3 md:w-2/3"
+					class="absolute left-4 md:left-12 top-1/2 -translate-y-1/2 flex gap-2 md:flex-col md:gap-3 md:w-2/3"
 				>
 					<h1
 						class="text-white text-sm md:text-2xl font-semibold font-garamond uppercase tracking-wide"
