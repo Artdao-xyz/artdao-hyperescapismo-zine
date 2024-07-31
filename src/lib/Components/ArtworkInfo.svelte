@@ -70,13 +70,9 @@
 		</div>
 
 		<div class="relative">
-			<img draggable="false" class="hidden md:block" src="/artwork-info.png" alt="artwork info" />
-			<img
-				draggable="false"
-				class="md:hidden h-fit w-full"
-				src="/artwork-info-mobile.png"
-				alt="artwork info"
-			/>
+			<img draggable="false" class="sm:hidden w-full" src="/artwork-info-mobile.png" alt="artwork info"/>
+			<img draggable="false" class="hidden sm:block md:hidden w-full" src="/artwork-info-md.png" alt="artwork info"/>
+			<img draggable="false" class="hidden md:block w-fit" src="/artwork-info.png" alt="artwork info" />
 			{#if isArtworkSelected}
 				<div
 					class="absolute left-4 md:left-12 top-1/2 -translate-y-1/2 flex gap-2 md:flex-col md:gap-3 md:w-2/3"

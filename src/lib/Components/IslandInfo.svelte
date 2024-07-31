@@ -64,10 +64,10 @@
 				alt="{scene.id} icon"
 			/>
 			<div
-				class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-2/3 lg:w-1/2 xl:w-1/3 space-y-4 px-8 md:px-8 py-4 md:py-0 text-center"
+				class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-fit sm:w-full space-y-4 pt-2 md:py-0 text-center"
 			>
 				<p
-					class="text-center text-white text-xs md:text-sm font-monda font-light leading-tight tracking-wide"
+					class="relative sm:w-1/2 xl:w-1/3 mx-auto text-center text-white text-xs md:text-sm font-monda font-light leading-tight tracking-wide"
 				>
 					{scene.text}
 				</p>

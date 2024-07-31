@@ -14,7 +14,10 @@ export default {
 			},
 			dropShadow: {
 				cloud: '0 5px 5px rgba(255, 255, 255,0.5)'
-			}
+			},
+			screens: {
+				'md': '850px', // Change '900px' to your desired breakpoint
+			},
 		}
 	},
 	plugins: []

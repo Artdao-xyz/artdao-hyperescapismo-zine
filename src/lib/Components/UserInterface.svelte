@@ -29,7 +29,7 @@
 <Arrows />
 
 <!-- ARTWORKS INFO -->
- <div class="absolute left-0 bottom-16 w-full h-fit space-y-2.5">
+ <div class="absolute left-0 bottom-16 md:bottom-0 w-full h-fit space-y-2.5">
 	<ArtworkInfo />
 	<ArtworkBidding />
 </div>

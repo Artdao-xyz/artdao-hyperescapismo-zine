@@ -1,209 +1,166 @@
 import * as THREE from 'three';
-import Sizes from './Sizes';
-import Experience from '../Experience';
 import { sceneStore } from '/src/lib/store.js';
-import Select from './Select';
-export default class Raycaster {
-	constructor(targets, camera) {
-		this.experience = new Experience();
+import { get } from 'svelte/store';
+import Experience from '../Experience.js';
+class RaycasterHandler {
+    constructor() {
+        this.experience = new Experience();
+        this.camera = this.experience.camera.instance;
+        this.scene = this.experience.scene;
+        this.raycaster = new THREE.Raycaster();
+        this.mouse = new THREE.Vector2();
+        this.touch = new THREE.Vector2();
+        this.intersects = [];
+        this.isDragging = false;
+        this.mouseDownTime = 0;
 
-		this.targets = targets;
-		this.camera = camera;
-		this.sizes = new Sizes();
-		this.mouse = new THREE.Vector2();
-		this.raycasterEnabled = true;
-		this.raycaster = new THREE.Raycaster();
-		this.currentIntersect = null;
-		this.prevIntersect = 'idle';
-		this.unsubscribe = null;
+        // Bind event handlers
+        this.onMouseMove = this.onMouseMove.bind(this);
+        this.onMouseClick = this.onMouseClick.bind(this);
+        this.onTouchStart = this.onTouchStart.bind(this);
+        this.onTouchEnd = this.onTouchEnd.bind(this);
+        this.onMouseDown = this.onMouseDown.bind(this);
+        this.onMouseUp = this.onMouseUp.bind(this);
 
-		if (this.unsubscribe) {
-			this.unsubscribe();
-		}
+        // Add event listeners
+        window.addEventListener('mousemove', this.onMouseMove, false);
+        window.addEventListener('mousedown', this.onMouseDown, false);
+        window.addEventListener('mouseup', this.onMouseUp, false);
+        window.addEventListener('click', this.onMouseClick, false);
+        window.addEventListener('touchstart', this.onTouchStart, false);
+        window.addEventListener('touchend', this.onTouchEnd, false);
+    }
 
-		this.unsubscribe = sceneStore.subscribe((value) => {
-			this.prevIntersect = value;
-		});
+    onMouseMove(event) {
+        this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+        this.updateRaycaster(this.mouse);
+    }
 
-		this.selectIce = new Select(this.targets[0].position);
-		this.selectDesert = new Select(this.targets[1].position);
-		this.selectFire = new Select(this.targets[2].position);
-		this.selectRuins = new Select(this.targets[3].position);
+    onMouseDown(event) {
+        this.isDragging = false; // Reset drag flag on mouse down
+        this.mouseDownTime = Date.now(); // Record mouse down time
+    }
 
-		this.pointerMove();
-		this.pointerClick();
-	}
+    onMouseUp(event) {
+        const mouseUpTime = Date.now();
+        // Set drag flag only if mouse is held down for a short time (click)
+        this.isDragging = mouseUpTime - this.mouseDownTime > 200; // Adjust the threshold as needed
+    }
 
-	pointerMove() {
-		document.addEventListener('pointermove', (event) => {
-			this.mouse.x = (event.clientX / this.sizes.width) * 2 - 1;
-			this.mouse.y = -(event.clientY / this.sizes.height) * 2 + 1;
-			this.raycaster.setFromCamera(this.mouse, this.camera);
+    onMouseClick(event) {
+        if (!this.isDragging) {
+            this.updateRaycaster(this.mouse);
+            this.handleIntersection();
+        }
+    }
 
-			const intersects = this.raycaster.intersectObjects(this.targets);
+    onTouchStart(event) {
+        if (event.touches.length === 1) {
+            this.isDragging = false; // Reset drag flag on touch start
+            this.touch.x = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
+            this.touch.y = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
+            this.mouseDownTime = Date.now(); // Record touch start time
+        }
+    }
 
-			let hoverCursor = 'default';
-			let isIntersectValid = false;
+    onTouchEnd(event) {
+        if (event.changedTouches.length === 1) {
+            const touchEndTime = Date.now();
+            // Set drag flag only if touch is held down for a short time (tap)
+            this.isDragging = touchEndTime - this.mouseDownTime > 200; // Adjust the threshold as needed
+            if (!this.isDragging) {
+                this.updateRaycaster(this.touch);
+                this.handleIntersection();
+            }
+        }
+    }
 
-			// Check if sceneStore is not 'idle' and there are intersections
-			if (this.prevIntersect !== 'idle' && intersects.length > 0) {
-				const intersectedObjectName = intersects[0].object.name;
+    updateRaycaster(coords) {
+        this.raycaster.setFromCamera(coords, this.camera);
+        this.intersects = this.raycaster.intersectObjects(this.scene.children, true);
 
-				// Define artwork ranges for each island
-				const artworkRanges = {
-					'island-fire': [1, 5],
-					'island-ice': [6, 10],
-					'island-desert': [11, 15],
-					'island-ruins': [16, 20]
-				};
+        if (this.intersects.length > 0) {
+            const name = this.intersects[0].object.name;
+            const islandNames = ['island-fire', 'island-ice', 'island-desert', 'island-ruins'];
+            const artworkNames = Array.from({
+                length: 20
+            }, (_, i) => `artwork${i + 1}`);
+            const currentScene = get(sceneStore);
+            const artworkRanges = {
+                'island-fire': [1, 5],
+                'island-ice': [6, 10],
+                'island-desert': [11, 15],
+                'island-ruins': [16, 20]
+            };
 
-				// Function to check if artwork is in range
-				const isArtworkInRange = (artwork, range) => {
-					const artworkNum = parseInt(artwork.replace('artwork', ''), 10);
-					return artworkNum >= range[0] && artworkNum <= range[1];
-				};
+            if (currentScene === 'idle') {
+                // Change cursor only for islands in idle mode
+                if (islandNames.includes(name)) {
+                    document.body.style.cursor = 'pointer';
+                } else {
+                    document.body.style.cursor = 'default';
+                }
+            } else if (currentScene === name) {
+                document.body.style.cursor = 'pointer';
+            } else if (islandNames.includes(currentScene)) {
+                // Change cursor only for appropriate artworks in island mode
+                const [start, end] = artworkRanges[currentScene];
+                const artworkNumber = parseInt(name.replace('artwork', ''), 10);
 
-				// Check if the hover is over a valid interactable object
-				if (
-					(this.prevIntersect in artworkRanges &&
-						intersectedObjectName.startsWith('artwork') &&
-						isArtworkInRange(intersectedObjectName, artworkRanges[this.prevIntersect])) ||
-					(this.prevIntersect.startsWith('island') &&
-						intersectedObjectName.startsWith('artwork') &&
-						isArtworkInRange(intersectedObjectName, artworkRanges[this.prevIntersect])) ||
-					intersectedObjectName === this.prevIntersect
-				) {
-					isIntersectValid = true;
-					hoverCursor = 'pointer';
-				}
-			} else if (this.prevIntersect === 'idle' && intersects.length > 0) {
-				// If sceneStore is 'idle' and there are intersections, change cursor
-				isIntersectValid = true;
-				hoverCursor = 'pointer';
-			}
+                if (artworkNames.includes(name) && artworkNumber >= start && artworkNumber <= end) {
+                    document.body.style.cursor = 'pointer';
+                } else {
+                    document.body.style.cursor = 'default';
+                }
+            } else {
+                document.body.style.cursor = 'default';
+            }
+        } else {
+            document.body.style.cursor = 'default';
+        }
+    }
 
-			// Update cursor based on valid hover conditions
-			document.body.style.cursor = hoverCursor;
+    handleIntersection() {
+        const currentScene = get(sceneStore);
 
-			// Optionally, handle hover effects for specific objects if needed
-			if (isIntersectValid) {
-				switch (intersects[0].object.name) {
-					case 'island-ice':
-						// Handle island-ice hover effect
-						break;
-					case 'island-desert':
-						// Handle island-desert hover effect
-						break;
-					case 'island-fire':
-						// Handle island-fire hover effect
-						break;
-					case 'island-ruins':
-						// Handle island-ruins hover effect
-						break;
-					default:
-						if (intersects[0].object.name.startsWith('artwork')) {
-							// Handle artwork hover effect
-						}
-				}
-			}
-		});
-	}
+        if (this.intersects.length > 0) {
+            const name = this.intersects[0].object.name;
+            const islandNames = ['island-fire', 'island-ice', 'island-desert', 'island-ruins'];
+            const artworkNames = Array.from({
+                length: 20
+            }, (_, i) => `artwork${i + 1}`);
+            const artworkRanges = {
+                'island-fire': [1, 5],
+                'island-ice': [6, 10],
+                'island-desert': [11, 15],
+                'island-ruins': [16, 20]
+            };
 
-	pointerClick() {
-		let isDragging = false;
-		let dragStartTime;
+            if (currentScene === 'idle') {
+                if (islandNames.includes(name)) {
+                    sceneStore.set(name);
+                }
+            } else if (islandNames.includes(currentScene)) {
+                const [start, end] = artworkRanges[currentScene];
+                const artworkNumber = parseInt(name.replace('artwork', ''), 10);
 
-		document.addEventListener('pointerdown', (event) => {
-			dragStartTime = Date.now();
-			isDragging = false;
-		});
+                if (artworkNames.includes(name) && artworkNumber >= start && artworkNumber <= end) {
+                    sceneStore.set(name);
+                }
+            }
+        }
+    }
 
-		document.addEventListener('pointermove', (event) => {
-			// Set a threshold distance/time to distinguish between click and drag
-			if (Date.now() - dragStartTime > 100) {
-				isDragging = true;
-			}
-		});
-
-		document.addEventListener('pointerup', (event) => {
-			if (!isDragging) {
-				const intersects = this.raycaster.intersectObjects(this.targets);
-
-				if (intersects.length > 0) {
-					this.currentIntersect = intersects[0];
-					// Define artwork ranges for each island
-					const artworkRanges = {
-						'island-fire': [1, 5],
-						'island-ice': [6, 10],
-						'island-desert': [11, 15],
-						'island-ruins': [16, 20]
-					};
-
-					// Function to check if artwork is in range
-					const isArtworkInRange = (artwork, range) => {
-						const artworkNum = parseInt(artwork.replace('artwork', ''), 10);
-						return artworkNum >= range[0] && artworkNum <= range[1];
-					};
-
-					// Allow clicks within the same island's artwork range or on the same island
-					if (
-						(this.prevIntersect in artworkRanges &&
-							this.currentIntersect.object.name.startsWith('artwork') &&
-							isArtworkInRange(
-								this.currentIntersect.object.name,
-								artworkRanges[this.prevIntersect]
-							)) ||
-						(this.prevIntersect.startsWith('island') &&
-							this.currentIntersect.object.name.startsWith('artwork') &&
-							isArtworkInRange(
-								this.currentIntersect.object.name,
-								artworkRanges[this.prevIntersect]
-							)) ||
-						(!this.prevIntersect.startsWith('island') && !this.prevIntersect.startsWith('artwork'))
-					) {
-						switch (this.currentIntersect.object.name) {
-							case 'island-ice':
-								if (this.prevIntersect !== 'island-ice') {
-									sceneStore.set('island-ice');
-								}
-								break;
-							case 'island-desert':
-								if (this.prevIntersect !== 'island-desert') {
-									sceneStore.set('island-desert');
-								}
-								break;
-							case 'island-fire':
-								if (this.prevIntersect !== 'island-fire') {
-									sceneStore.set('island-fire');
-								}
-								break;
-							case 'island-ruins':
-								if (this.prevIntersect !== 'island-ruins') {
-									sceneStore.set('island-ruins');
-								}
-								break;
-							case 'portal-ice':
-							case 'portal-desert':
-							case 'portal-fire':
-							case 'portal-ruins':
-								sceneStore.set('idle');
-								break;
-							default:
-								if (this.currentIntersect.object.name.startsWith('artwork')) {
-									sceneStore.set(this.currentIntersect.object.name);
-								}
-						}
-					}
-				}
-			}
-
-			isDragging = false;
-		});
-	}
-
-	destroy() {
-		if (this.unsubscribe) {
-			this.unsubscribe();
-		}
-	}
+    dispose() {
+        // Remove event listeners when disposing the class
+        window.removeEventListener('mousemove', this.onMouseMove, false);
+        window.removeEventListener('mousedown', this.onMouseDown, false);
+        window.removeEventListener('mouseup', this.onMouseUp, false);
+        window.removeEventListener('click', this.onMouseClick, false);
+        window.removeEventListener('touchstart', this.onTouchStart, false);
+        window.removeEventListener('touchend', this.onTouchEnd, false);
+    }
 }
+
+export default RaycasterHandler;
