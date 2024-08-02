@@ -44,8 +44,8 @@
 			on:click|stopPropagation={setScene.bind(null, lastValidScene)}
 			class="{$sceneStore === 'idle'
 				? ''
-				: 'opacity-75'} absolute bottom-0 left-4 md:relative md:left-0 self-start uppercase font-semibold font-garamond tracking-wide border-y-[1px] border-white text-white py-1 hover:drop-shadow-cloud"
-			>return</button
+				: 'opacity-75'} absolute -bottom-2 left-4 md:relative md:left-0 self-start hover:drop-shadow-cloud"
+			><img src="/go-back.png" alt="return" /></button
 		>
 	{:else}
 		<div class="flex items-center justify-between gap-4">
